@@ -1,0 +1,164 @@
+{% extends "template.twig" %}
+
+{% block body %}
+
+    <!-- Responsive top menu -->
+    <div class="ui fixed inverted main menu">
+    <div class="ui container">
+        <a class="launch icon item sidebar-toggle">
+        <i class="sidebar icon"></i>
+        </a>
+    </div>
+    </div>
+
+    <h1 class="ui header datetime">
+        {{ "now"| date('j F Y, g:i a') }}
+    </h1>
+
+    {#<div class="ui icon message">
+        <i class=" heart icon"></i>
+        <div class="content">
+            <div class="header">
+                Bem vindo Admin !
+            </div>
+            <p></p>
+        </div>
+    </div>#}
+
+    <div class="ui three column row">
+    <div class="dashboard-stat column">
+        <div class="ui segments">
+        <div class="ui segment">
+            <h3 class="ui blue header">Enviadas</h3>
+        </div>
+        <div class="ui secondary olive green inverted dashboard center aligned segment">
+            <div class="ui dashboard statistic">
+                <div class="value">
+                    5000
+                </div>
+                <div class="label">
+                    Sms
+                </div>
+            </div>
+            <div class="ui center animated list">
+                <a class="item">
+                    <i class="minus circle icon"></i>
+                    <div class="content">
+                    <div class="description">Todas</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="dashboard-stat column">
+        <div class="ui segments">
+        <div class="ui segment">
+            <h3 class="ui blue header">Recebidas</h3>
+        </div>
+        <div class="ui teal inverted dashboard center aligned segment">
+            <div class="ui dashboard statistic">
+            <div class="value">
+                700
+            </div>
+            <div class="label">
+                Sms
+            </div>
+            </div>
+
+            <div class="ui center animated list">
+                <a class="item">
+                    <i class="minus circle icon"></i>
+                    <div class="content">
+                    <div class="description">Todas</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="dashboard-stat column">
+        <div class="ui segments">
+        <div class="ui segment">
+            <h3 class="ui blue header">Contatos</h3>
+        </div>
+        <div class="ui secondary blue inverted dashboard center aligned segment">
+            <div class="ui dashboard statistic">
+            <div class="value">
+                5000
+            </div>
+            <div class="label">
+                
+            </div>
+            </div>
+             <div class="ui center animated list">
+            <a class="item">
+                <i class="minus circle icon"></i>
+                <div class="content">
+                <div class="description">Todas</div>
+                </div>
+            </a>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="two column row">
+
+        <div class="top-table column">
+            <div class="ui segments">
+            <div class="ui segment">
+                <h3 class="ui blue header">Últimas Mensagens</h3>
+            </div>
+            <div class="ui segment">
+                <table class="ui very basic table">
+                <tbody>
+                    <tr>
+                    <td>1.</td>
+                    <td>(65) 99463782</td>
+                    <td>Preciso do seu contato..</td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td>(65) 99463782</td>
+                        <td>Preciso do seu contato..</td>
+                    </tr>
+                    </tr>
+                    <tr>
+                        <td>3.</td>
+                        <td>(65) 99463782</td>
+                        <td>Preciso do seu contato..</td>
+                    </tr>
+                    <tr>
+                        <td>4.</td>
+                        <td>(65) 99463782</td>
+                        <td>Preciso do seu contato..</td>
+                    </tr>
+                    <tr>
+                        <td>5.</td>
+                        <td>(65) 99463782</td>
+                        <td>Preciso do seu contato..</td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+
+        <div class="doughnut-chart column">
+            <div class="ui segments">
+            <div class="ui segment">
+                <h3 class="ui blue header">Gráfico</h3>
+            </div>
+            <div class="ui segment">
+                <canvas id="doughnuts_are_tasty" width="200" height="179" style="width: 200px; height: 179px;"></canvas>
+                <ul id="dashboard_legend">
+                    <ul class="doughnut-legend">
+                        <li><span style="background-color:#F7464A"></span>Red</li><li><span style="background-color:#46BFBD"></span>Green</li><li><span style="background-color:#FDB45C"></span>Yellow</li></ul></ul>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

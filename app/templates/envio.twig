@@ -1,0 +1,60 @@
+{% extends "template.twig" %}
+
+{% block body %}
+<div class="ui secondary pointing fluid menu">
+    <h2 class="ui header">
+        Enviar SMS
+    </h2>
+
+    <!--<div class="right menu">
+        <a class="ui active item">
+        Lista
+        </a>
+        <a class="ui disabled item">
+        Transactions
+        </a>
+    </div>-->
+</div>
+<div class="sixteen wide sales column">
+    <form class="ui form" id="example-form" name="my-form">
+        <h4 class="ui dividing header">Enviar Mensagem</h4>
+        
+        <div class="two fields">
+            <div class="field">
+                <label>Número</label>
+                <input type="text" id="phone-number" name="phone" type="text" placeholder="(XX)XXXX-XXXX" maxlength="13" tabindex="1">
+            </div>
+            <div class="field">
+                <label>Canal</label>
+                <div class="field">
+                    <select class="ui fluid search dropdown" tabindex="2" name="">
+                        {% for canal in canais %}
+                            <option value="">{{ canal.nome }} </option>
+                        {% endfor %}        
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="two fields">
+        <div class="field">
+            <div class="ui toggle checkbox">
+                <label>Salvar número?</label>
+                <input type="checkbox" name="gift" class="hidden">
+            </div>
+        </div>
+        <div class="field"> 
+            <input type="text" name="" maxlength="16" id="nome" class="hidden" placeholder="Nome">
+        </div>
+        </div>
+
+        <div class="field">
+            <label>Messagem</label>
+            <textarea tabindex="2"></textarea>
+        </div>
+         <button class="ui button" tabindex="3" type="button" id="submitmsg" value="Submit">Enviar</button>
+    </form>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,40 @@
+{% extends "template.twig" %}
+
+{% block body %}
+<div class="ui secondary pointing fluid menu">
+    <h2 class="ui header">Contato</h2>
+</div>
+<div class="sixteen wide sales column">
+    {% include 'notificacao.twig' only %}
+    
+    <form class="ui form" id="contato-form" name="contato-form" method="POST" action="{{ path_for('contatos_update',{'contato': contato.id }) }}">
+        
+        <h4 class="ui dividing header">Editar Contato</h4>    
+        <input type="hidden" id="id" value="{{contato.id}}">
+
+        <div class="two fields">
+            <div class="field">
+                <label>Nome</label>
+                <input type="text" name="nome" tabindex="1" value="{{ contato.nome }}">
+            </div>
+            <div class="field">
+                <label>Número</label>
+                <input type="text" id="phone-number" name="phone" placeholder="(XX)XXXX-XXXX" value="{{contato.numero}}" maxlength="13" tabindex="1">
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label>E-Mail</label>
+                <input type="email" name="email" tabindex="1" value="{{ contato.email }}">
+            </div>
+        </div>
+
+        <div class="field">
+            <label>Observação</label>
+            <textarea tabindex="2">{{contato.obs}}</textarea>
+        </div>
+        <button class="ui button" tabindex="3"  type="submit"  value="Submit">Salvar</button>
+    </form>
+</div>
+{% endblock %}
+

@@ -1,0 +1,91 @@
+<html>
+  <head>
+    
+    <link rel="stylesheet" type="text/css" href="{{ base_url() }}/lib/semantic/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ base_url() }}/css/admin.css">
+    <link rel="stylesheet" type="text/css" href="{{ base_url() }}/css/style.css">
+    
+    <link rel="stylesheet" type="text/css" href="{{ base_url() }}/css/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="{{ base_url() }}/css/icon.css">
+
+
+    <script src="{{ base_url() }}/lib/jquery/dist/jquery.min.js"></script>
+    <script src="{{ base_url() }}/lib/semantic/dist/semantic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+
+
+    <script src="{{ base_url() }}/js/simplesMenssagem.js"></script>
+    <script src="{{ base_url() }}/js/admin.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    
+    <title>SMS | Mensagens</title>
+
+  </head>
+
+  <body data-page="sales">
+    <!-- Sidebar menu - responsive only -->
+    <div class="ui sidebar inverted vertical menu">
+      <a class="item" href="{{ path_for('index') }}">
+        <h4 class="ui grey header">SMS</h4>
+        <!--<p>Sign Out</p>-->
+      </a>
+      <a class="item" href="{{ path_for('index') }}">
+         Dashboard
+      </a>
+      <a class="item" href="{{ path_for('index') }}">
+         Enviar SMS
+      </a>
+      <a class="active gray item" href="{{ path_for('mensagens') }}">
+        Mensagens
+        <div class="ui label">11</div>
+      </a>
+      <a class="item" href="{{ path_for('contatos') }}">
+        Contatos
+        <div class="ui label">2</div>
+      </a>  
+    </div>
+
+    <div class="pusher">
+      <div class="ui grid container">
+        <!-- Non-responsive menu -->
+        <div class="ui left fixed vertical inverted menu">
+          <a class="item" href="">
+            <h4 class="ui grey header">SMS <i class="Talk Outline icon"></i></h4>
+            <!--<p>Sign Out</p>-->
+          </a>
+          <a class="item" href="{{ path_for('index') }}">
+             <i class="large Dashboard icon"></i> Dashboard
+          </a>
+          <a class="item" href="{{ path_for('index') }}">
+            <i class="large Send Outline icon"></i>
+            Enviar SMS
+          </a>
+          <a class="active gray item" href="{{ path_for('mensagens') }}">
+            <i class="large Talk Outline icon"></i> 
+            Mensagens
+            <div class="ui label">11</div>
+          </a>
+          <a class="item" href="{{ path_for('contatos') }}">
+            <i class="large Add User icon"></i> 
+            Contatos   
+            <div class="ui label">500</div>
+          </a>
+        </div>
+        <div class="ui main grid">
+          <!-- Responsive top menu -->
+          <div class="ui fixed inverted main menu">
+            <div class="ui container">
+              <a class="launch icon item sidebar-toggle">
+                <i class="sidebar icon"></i>
+              </a>
+            </div>
+          </div>
+          
+          {% block body %}{% endblock %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

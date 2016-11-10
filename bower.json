@@ -1,0 +1,14 @@
+{
+  "name": "sms",
+  "authors": [
+    "Eduardo Avila Malheiros <edu.avila2@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "semantic": "semantic-ui#^2.2.6"
+  }
+}

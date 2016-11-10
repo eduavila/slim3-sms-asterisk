@@ -1,0 +1,11 @@
+{% if messages.error %}
+    <div class="ui error message">
+        <i class="close icon"></i>
+        <div class="header">Erro</div>
+        <ul class="list">
+            {% for item in messages.error %}
+                <li>{{item}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

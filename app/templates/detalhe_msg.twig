@@ -1,0 +1,44 @@
+{% extends "template.twig" %}
+
+{% block body %}
+    <div class="ui secondary pointing fluid menu">
+        <h2 class="ui header">
+            Mensagens
+        </h2>
+    </div>
+
+    <div class="sixteen wide sales column">
+        <div class="ui comments" id="chatBox">
+            <input type="hidden" id="numero" value="{{numero}}">
+            <div class="ui active centered inline loader" id="loader"></div>
+            <div class="inner"></div>
+
+            <div class="ui icon message novas-messagens">
+                <i class="tiny inbox icon"></i>
+                <div class="content">
+                    <div class="header">
+                      Chego novas messagens! <a href="">Carregar?</a>                   
+                    </div>
+                    <p></p>
+                </div>
+            </div> 
+        </div>
+        <form class="ui form">
+            <div class="field">
+                <textarea rows="2" id="usermsg"></textarea>
+            </div>
+            <div class="two fields">
+            <div class="field">
+                <button class="ui button" tabindex="3" type="button" id="submitmsg" value="Submit">Enviar</button> 
+            </div>  
+            <div class="field">
+                <select class="ui fluid search dropdown" tabindex="2" name="">
+                    {% for canal in canais %}
+                        <option value="">{{ canal.nome }} </option>
+                    {% endfor %}        
+                </select>
+            </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
