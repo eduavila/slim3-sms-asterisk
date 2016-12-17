@@ -24,31 +24,12 @@ class CampanhaController
         $this->app = $app;
     }
 
-    public function index(Request $request, Response $response,$args)
+    public function index(Request $request, Response $response)
     {   
-
-        $page = $request->getQueryParam('page',1);
-
-        $campanhas = Campanha::orderBy('id_campanha_id','desc')
-                        ->skip(1 * ($page - 1))
-                        ->take(1)->get();
-
-        $totalItems = Campanha::count();
-
-        $itemsPerPage = 1;
-
-        $urlPattern = '/campanhas?page=(:num)';
-
-        // Criar Paginacao.
-        $paginator = new Paginator($totalItems, $itemsPerPage, $page, $urlPattern);
-
-        //Envia para 
+        $campanhas = Campanha::orderBy('id_campanha_id','desc')->get();
+        
         return $this->app->view
-                    ->render($response, 'campanhas/campanhas.twig',
-                    [
-                        'campanhas'=>$campanhas,
-                        'paginator'=>$paginator
-                    ]);
+                    ->render($response, 'campanhas/campanhas.twig',['campanhas'=>$campanhas]);
     }
 
     public function novo(Request $request, Response $response, $args)

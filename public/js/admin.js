@@ -27,6 +27,8 @@ $(document)
         }
       });
 
+    $('.ui.dropdown').dropdown();
+    
     // Sidebar 
     $("a.sidebar-toggle")
       .click(function(){

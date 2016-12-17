@@ -26,34 +26,10 @@ class ContatoController
 
     public function index(Request $request, Response $response,$args)
     {   
-
-        $page = $request->getQueryParam('page',1);
-
-        $contatos = Contato::orderBy('id_contato_id','desc')
-                        ->skip(1 * ($page - 1))
-                        ->take(1)->get();
-
-
-        $totalItems = Contato::count();
-
-        $itemsPerPage = 1;
-
-        $urlPattern = '/contatos?page=(:num)';
-
-        // Criar Paginacao.
-        $paginator = new Paginator($totalItems, $itemsPerPage, $page, $urlPattern);
+        $contatos = Contato::orderBy('id_contato_id','desc')->get();
         
-        // Verifica se possui messagens
-        $messages = $this->app->flash->getMessages();
-
-        //Envia para 
         return $this->app->view
-                    ->render($response, 'contatos/contatos.twig',
-                    [
-                        'contatos'=>$contatos,
-                        'messages'=>$messages,
-                        'paginator'=>$paginator
-                    ]);
+                    ->render($response, 'contatos/contatos.twig',['contatos'=>$contatos]);
     }
 
     public function novo(Request $request, Response $response, $args)

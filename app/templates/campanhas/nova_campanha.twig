@@ -10,12 +10,12 @@
     <form class="ui form" id="contato-form" name="contato-form" method="POST" action="{{ path_for('contatos_update',{'contato': contato.id }) }}">
         
         {#<h4 class="ui dividing header">Editar Contato</h4>    #}
-        <input type="hidden" id="id" value="{{contato.id}}">
+        <input type="hidden" id="id" value="{{contato.id_contato_id}}">
 
         <div class="two fields">
             <div class="field">
                 <label>Nome Campanha * </label>
-                <input type="text" name="nome" tabindex="1" value="{{ contato.nome }}">
+                <input type="text" name="nome" tabindex="1" value="{{ contato.nome_contato }}">
                 <label>Modelo</label>
                 <select class="ui fluid dropdown">
                     <option value="">Não usar modelo</option>

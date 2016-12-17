@@ -3,43 +3,44 @@
 {% block body %}
 
     <div class="ui secondary pointing fluid menu">
-        <h2 class="ui header">
-            Contatos
-        </h2>
+        <h2 class="ui header">Contatos</h2> 
     </div>
+
     <div class="sixteen wide sales column">
         {% include 'notificacao.twig' only %}
-        <div class="ui icon input">
-          <input type="text" placeholder="Pesquisar...">
-          <i class="circular search link icon"></i>
-        </div>
-        <table class="ui small very compact celled black table">
+
+        <table class="ui celled table datatable" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Nome</th>
                     <th>Telefone</th>
+                    <th>Nome</th>
                     <th>E-mail</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 {% for contato in contatos %}
                     <tr>
-                        <td><a href="{{ path_for('contatos_edit',{'contato': contato.id }) }}">{{ contato.id }}</a></td>                  
-                        <td>{{ contato.nome }}</td>
+                        <td>{{ contato.id_contato_id }}</td>                  
                         <td>{{ contato.numero }}</td>
+                        <td>{{ contato.nome_contato }}</td>
                         <td>{{ contato.email }}</td>
+                        <td class="btn-acoes">
+                            <div class="ui teal buttons">
+                            <div class="ui button">Visualizar</div>
+                                <div class="ui floating dropdown icon button">
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu">
+                                    <a class="item" href="{{ path_for('contatos_edit',{'contato': contato.id_contato_id }) }}"><i class="edit icon"></i> Editar</a>
+                                        <div class="item"><i class="delete icon"></i> Remover</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
-            <tfoot>
-                <tr>
-                    <th colspan="4">
-                       {% include 'paginate.twig' %}
-                    </th>
-                </tr>
-            </tfoot>
         </table>
     </div>
-
 {% endblock %}
