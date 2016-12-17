@@ -12,7 +12,6 @@ use App\Models\Canal;
 use App\Models\Contato;
 use App\Models\Mensagem;
 
-
 class DashboardController
 {
     protected $app;
@@ -23,6 +22,21 @@ class DashboardController
 
     public function index(Request $request, Response $response, $args)
     {   
-        return $this->app->view->render($response, 'dashboard.twig');
+    	$totEnviadas = Mensagem::where('status','e')->count();
+    	$totRecebidas = Mensagem::where('status','r')->count();
+    	$totContatos = Contato::count();
+
+    	$messagens = Mensagem::orderBy('data','desc')->orderBy('hora','desc')->limit(5)->get();
+
+        return $this->app->view->render($response, 'dashboard.twig',[
+        										'totEnviadas'=>$totEnviadas,
+        										'totRecebidas'=>$totRecebidas,
+        										'totContatos'=>$totContatos,
+        										'messagens'=>$messagens]);
+    }
+
+    public function show(Request $request, Response $response)
+    {
+
     }
 }

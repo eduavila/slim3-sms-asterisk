@@ -1,10 +1,10 @@
 body {
-    margin: 50px 0 0 0;
+    margin: 0 0 0 0;
     padding: 0;
     width: 100%;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #aaa;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 h1 {
@@ -22,6 +22,7 @@ h1 {
     position: absolute;
     bottom: 0px;
 }
+
 /*
 .chatBox{
     position: relative; 

@@ -1,0 +1,54 @@
+{% extends "template.twig" %}
+
+{% block body %}
+<div class="ui secondary pointing fluid menu">
+    <h2 class="ui header">Campanha</h2>
+</div>
+<div class="sixteen wide sales column">
+    {% include 'notificacao.twig' only %}
+    
+    <form class="ui form" id="contato-form" name="contato-form" method="POST" action="{{ path_for('contatos_update',{'contato': contato.id }) }}">
+        
+        {#<h4 class="ui dividing header">Editar Contato</h4>    #}
+        <input type="hidden" id="id" value="{{contato.id}}">
+
+        <div class="two fields">
+            <div class="field">
+                <label>Nome Campanha * </label>
+                <input type="text" name="nome" tabindex="1" value="{{ contato.nome }}">
+                <label>Modelo</label>
+                <select class="ui fluid dropdown">
+                    <option value="">Não usar modelo</option>
+                    <option value="1">Modelo1</option>
+                    <option value="2">Modelo2</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Número *</label>
+                <textarea tabindex="2">{{contato.obs}}</textarea>
+                  <!-- Btn file -->
+                <div class="ui action input">
+                    <input type="text" placeholder="Arquivo " readonly>
+                    <input type="file">
+                    <div class="ui icon button">
+                        <i class="attach icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>        
+            <div class="field">
+                <label>Mensagem *</label>
+                <div class="ui message">
+                    <ul class="list">
+                    <li>Para inserir o nome do contato use o parâmetro #NOME# no corpo da mensagem.</li>
+                    </ul>
+                </div>
+                <textarea tabindex="2">{{contato.obs}}</textarea>
+            </div>
+        
+        
+        <button class="ui button left" tabindex="3"  type="submit"  value="Submit">Salvar</button>
+    </form>
+</div>
+{% endblock %}
+

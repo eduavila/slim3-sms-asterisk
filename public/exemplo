@@ -1,0 +1,32 @@
+##### USO COM PARAMETROS - EXEMPLO SOMENTE COM NÚMEROS:
+
+9292631087;
+9292631087;
+9292631087;
+
+++++++  VEJA ABAIXO COMO SERIA UMA MENSAGEM COM PARÂMETROS:
+
+EX: Venha agora mesmo em nossa loja e ganhe 50% de desconto em qualquer produto.
+
+=============================================================================================
+
+##### USO COM PARAMETROS - EXEMPLO COM NÚMEROS E NOMES:
+
+9292631087;MARCELO;
+9292631087;JOAO;
+9292631087;CARLOS;
+
+++++++  VEJA ABAIXO COMO SERIA UMA MENSAGEM COM PARÂMETROS:
+
+EX: Neste dia tao especial queremos oferecer a voce #NOME# um desconto mais do especial.
+
+==============================================================================================
+##### USO COM PARAMETROS - EXEMPLO COM NÚMEROS, NOMES E CAMPOS:
+
+9292631087;MARCELO;MATRICULA 26;15/12/2025;VALOR DE R$: 100,00;
+9292631087;JOAO;MATRICULA 45;15/12/2025;VALOR DE R$: 100,00;
+9292631087;CARLOS;MATRICULA 12;15/12/2025;VALOR DE R$: 100,00;
+
+++++++  VEJA ABAIXO COMO SERIA UMA MENSAGEM COM PARÂMETROS:
+
+EX: Olá Sr. #NOME# - #CAMPO1#, no dia #CAMPO2# vence sua fatura no #CAMPO3#.

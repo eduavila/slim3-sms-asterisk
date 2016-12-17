@@ -1,20 +1,55 @@
 $(document)
   .ready(function(){
 
-    // For responsive sidebar menu
+    $('.datatable').DataTable({
+        "language": {
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "_MENU_ resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar",
+            "oPaginate": {
+                "sNext": "Próximo",
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
+            },
+            "oAria": {
+                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                "sSortDescending": ": Ordenar colunas de forma descendente"
+            }
+        }
+      });
+
+    // Sidebar 
     $("a.sidebar-toggle")
       .click(function(){
         $('.ui.sidebar').sidebar('toggle');
       });
 
+    $("input:text").click(function() {
+      $(this).parent().find("input:file").click();
+    });
+
+    $('input:file', '.ui.action.input')
+      .on('change', function(e) {
+        var name = e.target.files[0].name;
+        $('input:text', $(e.target).parent()).val(name);
+      });
+
+    $('select.dropdown').dropdown();
 
     //Button
     $('.ui.checkbox')
       .checkbox()
       .change(function(item){
-
         event.preventDefault();
-        
         if($(this).is('.checked'))
         {
           $("#nome").show();
@@ -23,7 +58,7 @@ $(document)
         }
       }); 
 
-      //Mascara
+      //Mascara Tel
       $("input[name='phone']").keyup(function() {
           $(this).val($(this).val().replace(/^(\d{2})(\d{4})(\d)+$/, "($1)$2-$3"));
       });
@@ -34,7 +69,7 @@ $(document)
 
       function resizeGraphs() {
           var salesChart = $("#sales_chart");
-          var table = $(".ui.table");
+          var table = $("<div class='ui'></div>.table");
           salesChart.css("width", table.width());
       }
 
@@ -60,36 +95,5 @@ $(document)
 
         var legendHolder = document.getElementById('dashboard_legend');
         legendHolder.innerHTML = myDoughnutChart.generateLegend();
-
       }
-
-
-      /**
-       *
-       *
-       *  Java script para rendenriza messagens.
-       *
-       * 
-       */
-      $('#chatBox').listSimpleMsg();
-
-      // Enviando Messagem.
-    	$("#submitmsg").click(function(){
-            var clientmsg = $("#usermsg").val();
-      		
-            var URL = "/mensagens/"+numero+"/enviar";
-
-            $.post(URL, {text: clientmsg});				
-      		
-            $("#usermsg").attr("value", "");
-      		
-            return false;
-    	});
-
-    setupDoughnut();
-
-
-    $(window).resize(function() {
-      resizeGraphs();
-    });
 });

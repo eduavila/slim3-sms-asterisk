@@ -1,6 +1,4 @@
 <?php
-
-
 namespace App\Controllers;
 
 use Slim\Views\Twig;
@@ -14,7 +12,6 @@ use App\Models\Canal;
 use App\Models\Contato;
 use App\Models\Mensagem;
 
-
 class MensagemController
 {
 
@@ -25,20 +22,31 @@ class MensagemController
         $this->app = $app;
     }
 
-
     public function index(Request $request, Response $response, $args)
+    {   
+            
+        $page = $request->getQueryParam('page',1);
+
+        $itemsPerPage = 50;
+
+        $mensagens = Mensagem::groupBy('numero')
+                        ->orderBy('id','desc')
+                        ->skip($itemsPerPage * ($page - 1))
+                        ->take($itemsPerPage)->get();
+
+
+        $totalItems = Mensagem::groupBy('numero')->count();
+
+        $urlPattern = '/mensagens?page=(:num)';
+
+        return $this->app->view->render($response, 'mensagens/mensagens.twig',['mensagens'=>$mensagens]);
+    }
+
+    public function enviar(Request $request, Response $response, $args)
     {   
         $canais= Canal::all();
         return $this->app->view->render($response, 'envio.twig',['canais'=>$canais]);
     }
-
-    public function mensagens(Request $request, Response $response, $args)
-    {   
-        $mensagens = Mensagem::groupBy('numero')->get();
-
-        return $this->app->view->render($response, 'lista_msg.twig',['mensagens'=>$mensagens]);
-    }
-
 
     // Rederiza pagina com detalhes da mensagens.
     public function detalheMensagens(Request $request, Response $response, $args)
@@ -62,8 +70,8 @@ class MensagemController
 
     public function buscarMensagens(Request $request,Response $response,$args)
     {
-        $limit = 10;
-        $offset = $request->getQueryParam('offset');
+        //$limit = 10;
+        //$offset = $request->getQueryParam('offset');
 
         $numero = $args['numero'];
 
@@ -78,13 +86,12 @@ class MensagemController
 
         $allPostVars =  $request->getParsedBody();
 
-        
         return  $response->withJson($allPostVars);
     }
 
 
     public function verificaNovasMessagem(Request $request,Response $response, $args)
     {
-    	$numero = $request->getAttribute('utimamessagem');
+    	$numero = $request->getAttribute('ultimamessagem');
     }
 }

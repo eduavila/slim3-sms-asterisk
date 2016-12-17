@@ -1,0 +1,36 @@
+{% extends "template.twig" %}
+
+{% block body %}
+    <div class="ui secondary pointing fluid menu">
+        <h2 class="ui header">
+            Campanhas
+        </h2>
+    </div>
+    <div class="sixteen wide sales column">
+        
+        {% include 'notificacao.twig' only %}
+
+        <table id="campanhas" class="ui celled table datatable" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Grupo Contratos</th>
+                    <th>Quantidade SMS</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for campanha in campanhas %}
+                    <tr>
+                        <td><a href="">{{ campanha.id_campanha_id }}</a></td>                  
+                        <td>{{ campanha.nome_campanha }}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

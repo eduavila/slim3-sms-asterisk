@@ -9,6 +9,9 @@ body {
   background-color: #F5F5F5 !important;
 }
 
+.ui.action.input input[type="file"] {
+  display: none !important;
+}
 .ui.main.grid {
   left: 18.75%;
   position: relative;
@@ -264,20 +267,25 @@ ul.doughnut-legend {
 .ui.comments{
   max-width:100% !important;
 }
+.ui.comments li{
+  border-bottom: 1px dashed;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
 
 .ui.comments .comment .text{
-  font-size: 1.2em !important;
+  font-size: 0.8em !important;
 }
 
 .ui.comments .comment .author{
-  font-size: 0.9em !important;
+  font-size: 1.0em !important;
 }
 
 /* 1.2em */
 
 #chatBox {
   width: 100%;
-  height: 400px;
+  height: 320px;
   
   overflow-y: scroll
 }

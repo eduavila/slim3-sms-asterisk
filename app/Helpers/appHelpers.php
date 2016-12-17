@@ -14,4 +14,8 @@ class helpers{
         return $app->response()->body(json_encode($response));
 
     }
+
+    static function getPath(){
+    	return$app->request()->getUri()->getPath();
+    }
 }

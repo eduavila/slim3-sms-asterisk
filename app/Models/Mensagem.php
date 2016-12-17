@@ -14,6 +14,11 @@ use Illuminate\Database\Eloquent\Model;
 */
 
 class Mensagem extends Model{
+
     protected $table = 'mensagens';
 
+    public function getMensagemAttribute($value)
+    {
+    	return base64_decode($value);
+    }
 }

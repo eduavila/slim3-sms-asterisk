@@ -13,10 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 * @author     Eduardo Avila Malheiro  <edu.avila2@gmail.com>
 */
 
-class Contato extends Model{
+class Campanha extends Model{
     
-    protected $table = 'contatos';
+    protected $table = 'campanhas';
     
-    protected $primaryKey='id_contato_id';
+    protected $primaryKey='id_campanha_id';
 
 }

@@ -1,0 +1,29 @@
+
+{% if paginator.numPages > 1 %}
+    <div class="ui right floated small pagination menu">
+        {% if paginator.prevUrl %}
+            <a class="icon item">
+                <i class="left chevron icon" href="{{ paginator.prevUrl }}" ></i>
+            </a>
+        {% endif %}
+
+        {% for page in paginator.pages %}
+            
+            {% if page.url %}
+                
+                <a class="item {{ page.isCurrent ? 'active' : '' }}" href="{{ page.url }}" >{{ page.num }}</a>
+
+            {% else %}
+                <div class="disabled item">
+                    ...
+                </div>
+            {% endif %}
+        {% endfor %}
+ 
+        {% if paginator.nextUrl %}
+            <a class="icon item" href="{{ paginator.nextUrl }}">
+                <i class="right chevron icon"></i>
+            </a>
+        {% endif %}
+    </div>
+{% endif %}

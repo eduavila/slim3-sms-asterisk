@@ -9,13 +9,13 @@ use Slim\Http\Response;
 use Slim\Slim as Slim;
 
 use App\Models\Canal;
-use App\Models\Contato;
+use App\Models\Campanha;
 use App\Models\Mensagem;
 
 use JasonGrimes\Paginator;
 
 
-class ContatoController
+class CampanhaController
 {
 
     protected $app;
@@ -29,36 +29,31 @@ class ContatoController
 
         $page = $request->getQueryParam('page',1);
 
-        $contatos = Contato::orderBy('id_contato_id','desc')
+        $campanhas = Campanha::orderBy('id_campanha_id','desc')
                         ->skip(1 * ($page - 1))
                         ->take(1)->get();
 
-
-        $totalItems = Contato::count();
+        $totalItems = Campanha::count();
 
         $itemsPerPage = 1;
 
-        $urlPattern = '/contatos?page=(:num)';
+        $urlPattern = '/campanhas?page=(:num)';
 
         // Criar Paginacao.
         $paginator = new Paginator($totalItems, $itemsPerPage, $page, $urlPattern);
-        
-        // Verifica se possui messagens
-        $messages = $this->app->flash->getMessages();
 
         //Envia para 
         return $this->app->view
-                    ->render($response, 'contatos/contatos.twig',
+                    ->render($response, 'campanhas/campanhas.twig',
                     [
-                        'contatos'=>$contatos,
-                        'messages'=>$messages,
+                        'campanhas'=>$campanhas,
                         'paginator'=>$paginator
                     ]);
     }
 
     public function novo(Request $request, Response $response, $args)
     {   
-        return $this->app->view->render($response, 'contatos/contatos_novo.twig');
+        return $this->app->view->render($response, 'campanhas/nova_campanha.twig');
     }
 
     public function editar(Request $request, Response $response, $args)
