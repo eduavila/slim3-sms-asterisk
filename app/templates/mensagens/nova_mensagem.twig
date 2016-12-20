@@ -5,15 +5,6 @@
     <h2 class="ui header">
         Enviar SMS
     </h2>
-
-    <!--<div class="right menu">
-        <a class="ui active item">
-        Lista
-        </a>
-        <a class="ui disabled item">
-        Transactions
-        </a>
-    </div>-->
 </div>
 <div class="sixteen wide sales column">
     <form class="ui form" id="example-form" name="my-form" action="{{ path_for('enviarMensagemRapida')}}" method="POST"> 
@@ -28,7 +19,7 @@
             <div class="field">
                 <label>Canal</label>
                 <div class="field">
-                    <select class="ui fluid search dropdown" tabindex="2" name="interface" value="" required>
+                    <select class="ui fluid search dropdown" tabindex="2" name="interface" value="interface" required>
                         {% for channel in channels %}
                             <option value="{{ channel.ID }}">{{ channel.ID }} </option>
                         {% endfor %}        

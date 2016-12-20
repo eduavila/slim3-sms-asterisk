@@ -40,12 +40,16 @@
       <a class="item" href="{{ path_for('index') }}">
          Dashboard
       </a>
-      <a class="{{ path == '/enviar' ? 'active' : '' }} item" href="">
+      <a class="{{ path == '/enviar' ? 'active' : '' }} item" href="{{ path_for('envioMensagem') }}">
          Enviar SMS
       </a>
       <a class="{{ path == '/messagens' ? 'active' : '' }} gray item"  href="{{ path_for('mensagens') }}">
         Mensagens
         <div class="ui label">{{tot_msg}}</div>
+      </a>
+      <a class="{{ path == '/contatos/novo' ? 'active' : '' }} item" href="{{ path_for('contatos_novo') }}">
+        Novo Contato
+        <div class="ui label">{{tot_contatos}}</div>
       </a>
       <a class="{{ path == '/contatos' ? 'active' : '' }} item" href="{{ path_for('contatos') }}">
         Contatos
@@ -68,7 +72,7 @@
           <a class="{{ path == '/' ? 'active' : '' }} item" href="{{ path_for('index') }}">
              <i class="large Dashboard icon"></i> Dashboard
           </a>
-          <a class="{{ path == '/mensagens/enviar' ? 'active' : '' }} item" href="">
+          <a class="{{ path == '/mensagens/enviar' ? 'active' : '' }} item" href="{{ path_for('envioMensagem') }}">
             <i class="large Send Outline icon"></i> 
             Enviar SMS
           </a>
@@ -77,14 +81,27 @@
             Mensagens
             <div class="ui label">{{tot_msg}}</div>
           </a>
+          <a class="{{ path == '/contatos/novo' ? 'active' : '' }} item" href="{{ path_for('contatos_novo') }}">
+              <i class="large Add User icon"></i> 
+              Novo Contato   
+          </a>
           <a class="{{ path == '/contatos' ? 'active' : '' }} item" href="{{ path_for('contatos') }}">
-            <i class="large Add User icon"></i> 
+            <i class="large Unordered List icon"></i> 
             Contatos   
             <div class="ui label">{{tot_contatos}}</div>
+          </a>
+          <a class="{{ path == '/campanhas/nova' ? 'active' : '' }} item" href="{{ path_for('campanhas_nova') }}">
+            
+              <i class="large Announcement icon"></i> 
+              Nova Campanha
           </a>
           <a class="{{ path == '/campanhas' ? 'active' : '' }} item" href="{{ path_for('campanhas') }}">
             Campanhas
             <div class="ui label">2</div>
+          </a>
+          <a class="{{ path == '/canais' ? 'active' : '' }} item" href="{{ path_for('channels') }}">
+            <i class="large icon"></i> 
+            Canais
           </a>
           <a class="{{ path == '/campanhas' ? 'active' : '' }} item" href="{{ path_for('campanhas') }}">
             Configuração

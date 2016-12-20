@@ -4,16 +4,17 @@
 //DashBoar 
 $app->get('/','App\Controllers\DashboardController:index')->setName('index');
 
-$app->get('/teste2','App\Controllers\DashboardController:teste');
-
 $app->get('/mensagens/enviar','App\Controllers\MensagemController:enviar')->setName('envioMensagem');
 
 $app->post('/mensagens/enviar','App\Controllers\MensagemController:enviarRapido')->setName('enviarMensagemRapida');
 
 $app->get('/mensagens','App\Controllers\MensagemController:index')->setName('mensagens');
 
+//Busca sms json.
+$app->get('/mensagens/{numero}/json','App\Controllers\MensagemController:buscarMensagens');
 
-$app->get('/mensagens/{numero}/list','App\Controllers\MensagemController:buscarMensagens');
+//Enviar sms.
+$app->post('/mensagens/{numero}/json','App\Controllers\MensagemController:enviarMensagem');
 
 $app->get('/mensagens/{numero}','App\Controllers\MensagemController:detalheMensagens')->setName('detalhe_mensagens');
 
@@ -33,7 +34,7 @@ $app->post('/mensagens/{numero}/enviar','App\Controllers\MensagemController:envi
 // Campanhas
 $app->get('/campanhas','App\Controllers\CampanhaController:index')->setName('campanhas');
 $app->get('/campanhas/nova','App\Controllers\CampanhaController:novo')->setName('campanhas_nova');
-
+$app->post('/campanhas/nova','App\Controllers\CampanhaController:salvar')->setName('campanhas_salvar');
 
 
 // Canais / Channel.

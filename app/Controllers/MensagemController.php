@@ -39,13 +39,13 @@ class MensagemController
 
         try{
             // busca lista de devices
-            $channels = $dongleCommand->getListChannel();  
+            $channels = $dongleCommand->getListChannel('',true);  
 
         }catch(\Exception $ex){
             $this->app->flash->addMessage('error', $ex->getMessage());
         }
-
-        return $this->app->view->render($response, 'envio.twig',['channels'=>$channels]);
+        
+        return $this->app->view->render($response, 'mensagens/nova_mensagem.twig',['channels'=>$channels]);
     }
 
     public function enviarRapido(Request $request, Response $response)
@@ -60,8 +60,8 @@ class MensagemController
         $mensagem->status     = 'e';
         $mensagem->data       = date("y-m-d");
         $mensagem->hora       = date("H:i:s");
-        $mensagem->interface  = $data['interface'];
-        $mensagem->numero     = $data['telefone'];
+        $mensagem->interface  = $data['interface']; 
+        $mensagem->numero     = $this->limpaNumero($data['telefone']);
         $mensagem->mensagem   = base64_encode($data['mensagem']);
         $mensagem->tipo_envio = 'RAPIDA';
 
@@ -74,23 +74,36 @@ class MensagemController
 
         $this->app->flash->addMessage('success',"Enviado para fila de sms.");
         
-        //return $response->withStatus(200)->withHeader('Location', '/mensagens/enviar');
+        $url = $this->app->get('router')->pathFor('detalhe_mensagens', ['numero' => $mensagem->numero]);
+    
+        return $response->withStatus(302)->withHeader('Location', $url);
     }
 
-
+    private function limpaNumero($numero)
+    {
+        return preg_replace("/[^0-9]/", "", $numero);
+    }
     // Rederiza pagina com detalhes da mensagens.
     public function detalheMensagens(Request $request, Response $response, $args)
     { 
-        $canais= Canal::all();
+        $dongleCommand = new DongleCommand();
 
+        $channels = [];
+
+        try{
+            // busca lista de devices
+            $channels = $dongleCommand->getListChannel('',true);  
+
+        }catch(\Exception $ex){
+            $this->app->flash->addMessage('error', $ex->getMessage());
+        }
+        
         $numero = trim($args['numero']);
 
-        return $this->app->view->render($response,'detalhe_msg.twig',['canais'=>$canais,'numero'=>$numero]);
+        return $this->app->view->render($response,'detalhe_msg.twig',['channels'=> $channels,'numero'=>$numero]);
     }
 
-
     // Busca messanges retornando um array json.
-
     public function buscarMensagens(Request $request,Response $response,$args)
     {
         $numero = $args['numero'];
@@ -104,14 +117,30 @@ class MensagemController
     {
         $numero = $request->getAttribute('numero');
 
-        $allPostVars =  $request->getParsedBody();
+        $data =  $request->getParsedBody();
 
+        $dongleCommand = new DongleCommand();
+
+        $mensagem = new Mensagem();
+
+        $mensagem->status     = 'e';
+        $mensagem->data       = date("y-m-d");
+        $mensagem->hora       = date("H:i:s");
+        $mensagem->interface  = $data['interface']; 
+        $mensagem->numero     = $numero;
+        $mensagem->mensagem   = base64_encode($data['mensagem']);
+        $mensagem->tipo_envio = 'RAPIDA';
+
+        if($mensagem->save()){
+            
+            $result = $dongleCommand->sendSMS($mensagem->numero,$mensagem->mensagem,$mensagem->interface);
+
+            if($result['status'] === true){
+                return $response->withJson(['status'=>'success','msg'=>'Enviado para fila de sms.']);
+            }else{
+                return $response->withJson(['status'=>'error','msg'=>$result['msg']['data']]);
+            }
+        }
         return  $response->withJson($allPostVars);
-    }
-
-
-    public function verificaNovasMessagem(Request $request,Response $response, $args)
-    {
-    	$numero = $request->getAttribute('ultimamessagem');
     }
 }

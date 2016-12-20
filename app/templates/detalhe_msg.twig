@@ -9,6 +9,7 @@
     </div>
 
     <div class="sixteen wide sales column">
+ 
         <div class="ui comments msg-historico">
 
             <input type="hidden" id="numero" value="{{numero}}">
@@ -21,20 +22,20 @@
         </div>
         <form class="ui form">
             <div class="field">
-                <textarea rows="2" id="usermsg" tabindex="1"></textarea>
+                <textarea rows="2" id="usermsg" tabindex="1" minlength="2" maxlength="180"></textarea>
             </div>
             <div class="two fields">
+                
                 <div class="field">
-                    <select class="ui fluid search dropdown" tabindex="2" name="">
-                        {% for canal in canais %}
-                            <option value="">{{ canal.nome }} </option>
+                    <select class="ui fluid search dropdown" tabindex="2" name="interface">
+                        {% for channel in channels %}
+                            <option value="{{ channel.ID }}">{{ channel.ID }} </option>
                         {% endfor %}        
                     </select>
                 </div>
-
-                 <div class="field">
+                <div class="field">
                     <button class="ui button" tabindex="3" type="button" id="submitmsg" value="Submit">Enviar</button> 
-                </div>  
+                </div> 
             </div>
         </form>
     </div>

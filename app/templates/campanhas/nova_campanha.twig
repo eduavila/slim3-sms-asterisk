@@ -7,7 +7,7 @@
 <div class="sixteen wide sales column">
     {% include 'notificacao.twig' only %}
     
-    <form class="ui form" id="contato-form" name="contato-form" method="POST" action="{{ path_for('contatos_update',{'contato': contato.id }) }}">
+    <form class="ui form" id="contato-form" name="contato-form" method="POST" enctype="multipart/form-data" action="{{ path_for('campanhas_salvar') }}">
         
         {#<h4 class="ui dividing header">Editar Contato</h4>    #}
         <input type="hidden" id="id" value="{{contato.id_contato_id}}">
@@ -29,7 +29,7 @@
                   <!-- Btn file -->
                 <div class="ui action input">
                     <input type="text" placeholder="Arquivo " readonly>
-                    <input type="file">
+                    <input type="file" name="newfile">
                     <div class="ui icon button">
                         <i class="attach icon"></i>
                     </div>
@@ -45,8 +45,6 @@
                 </div>
                 <textarea tabindex="2">{{contato.obs}}</textarea>
             </div>
-        
-        
         <button class="ui button left" tabindex="3"  type="submit"  value="Submit">Salvar</button>
     </form>
 </div>

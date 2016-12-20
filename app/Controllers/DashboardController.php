@@ -37,15 +37,4 @@ class DashboardController
         										'totContatos'=>$totContatos,
         										'messagens'=>$messagens]);
     }
-
-    public function show(Request $request, Response $response)
-    {
-
-    }
-
-    public function teste(Request $request, Response $response)
-    {
-        $Tasks = new Queue();
-        $Tasks->run();
-    }
 }

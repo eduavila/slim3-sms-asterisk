@@ -61,7 +61,7 @@ $(document)
       }); 
 
       //Mascara Tel
-      $("input[name='phone']").keyup(function() {
+      $("input[name='telefone']").keyup(function() {
           $(this).val($(this).val().replace(/^(\d{2})(\d{4})(\d)+$/, "($1)$2-$3"));
       });
       

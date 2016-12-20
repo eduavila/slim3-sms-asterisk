@@ -37,6 +37,19 @@ class CampanhaController
         return $this->app->view->render($response, 'campanhas/nova_campanha.twig');
     }
 
+    public function salvar(Request $request, Response $response, $args)
+    {   
+        $files = $request->getUploadedFiles();
+    
+        if(empty($files['newfile'])) {
+            throw new \Exception('Expected a newfile');
+        }
+        
+        if($files->getError() === UPLOAD_ERR_OK) {
+            $uploadFileName =  $files->getClientFilename();
+        }
+    }
+
     public function editar(Request $request, Response $response, $args)
     {   
         $id_contato = $request->getAttribute('contato');

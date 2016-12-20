@@ -23,4 +23,11 @@ class Mensagem extends Model{
     {
     	return base64_decode($value);
     }
+
+
+    public function dateHora(){
+        $date = new DateTime($this->data.''.$this->hora);
+        var_dump($date);
+        return $date->format("d-m-Y H:i:s");
+    }
 }
