@@ -12,6 +12,9 @@ use App\Models\Canal;
 use App\Models\Contato;
 use App\Models\Mensagem;
 
+use App\Sms\DongleCommand;
+use App\Sms\Queue;
+
 class DashboardController
 {
     protected $app;
@@ -38,5 +41,11 @@ class DashboardController
     public function show(Request $request, Response $response)
     {
 
+    }
+
+    public function teste(Request $request, Response $response)
+    {
+        $Tasks = new Queue();
+        $Tasks->run();
     }
 }

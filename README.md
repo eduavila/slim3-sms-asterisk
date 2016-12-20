@@ -1,10 +1,8 @@
-# Slim 3 Skeleton
 
-This is a simple skeleton project for Slim 3 that includes Twig, Flash messages and Monolog.
+####Exemplo configurançao do cron.
+Executa a cada 2 minuto, e joga resultado no arquivo.
+``*/2 * * * * php /Users/Eduardo/Documents/Projetos/sms_rafael/sms/app/Sms/QueueExec.php  >> /Users/Eduardo/Documents/Projetos/sms_rafael/smsteteCron.txt``
 
-## Create your project:
-
-    $ composer create-project --no-interaction --stability=dev akrabat/slim3-skeleton my-app
 
 ### Run it:
 

@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\Model;
 class Mensagem extends Model{
 
     protected $table = 'mensagens';
+    
+    public $timestamps = false;
 
     public function getMensagemAttribute($value)
     {

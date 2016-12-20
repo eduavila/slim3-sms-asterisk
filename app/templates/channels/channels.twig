@@ -1,0 +1,38 @@
+{% extends "template.twig" %}
+
+{% block body %}
+    <div class="ui secondary pointing fluid menu">
+        <h2 class="ui header">
+            Canais Dongle
+        </h2>
+    </div>
+    <div class="sixteen wide sales column">
+        
+        {% include 'notificacao.twig' only %}
+        <table id="channels" class="ui celled table datatable" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Device ID</th>
+                    <th>Group</th>
+                    <th>State</th>
+                    <th>Provider</th>
+                    <th>Número</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for channel in channels %}
+                    <tr>
+                        <td></td>                  
+                        <td>{{ channel.ID }}</td>
+                        <td>{{ channel.Group }}</td>
+                        <td>{{ channel.State }}</td>
+                        <td>{{ channel.Provider }}</td>
+                        <td>{{ channel.Number }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

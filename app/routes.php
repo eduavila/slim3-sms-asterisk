@@ -4,13 +4,14 @@
 //DashBoar 
 $app->get('/','App\Controllers\DashboardController:index')->setName('index');
 
-$app->get('/teste','App\Controllers\DashboardController:show')->setName('show');
-
-$app->get('/teste2','App\Controllers\DashboardController:teste2');
+$app->get('/teste2','App\Controllers\DashboardController:teste');
 
 $app->get('/mensagens/enviar','App\Controllers\MensagemController:enviar')->setName('envioMensagem');
 
+$app->post('/mensagens/enviar','App\Controllers\MensagemController:enviarRapido')->setName('enviarMensagemRapida');
+
 $app->get('/mensagens','App\Controllers\MensagemController:index')->setName('mensagens');
+
 
 $app->get('/mensagens/{numero}/list','App\Controllers\MensagemController:buscarMensagens');
 
@@ -32,3 +33,9 @@ $app->post('/mensagens/{numero}/enviar','App\Controllers\MensagemController:envi
 // Campanhas
 $app->get('/campanhas','App\Controllers\CampanhaController:index')->setName('campanhas');
 $app->get('/campanhas/nova','App\Controllers\CampanhaController:novo')->setName('campanhas_nova');
+
+
+
+// Canais / Channel.
+$app->get('/canais','App\Controllers\ChannelController:index')->setName('channels');
+$app->get('/canais/json','App\Controllers\ChannelController:getListChannel');

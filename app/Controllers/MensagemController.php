@@ -1,16 +1,15 @@
 <?php
 namespace App\Controllers;
 
-use Slim\Views\Twig;
 use Psr\Log\LoggerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-use Slim\Slim as Slim;
-
 use App\Models\Canal;
 use App\Models\Contato;
 use App\Models\Mensagem;
+
+use App\Sms\DongleCommand;
 
 class MensagemController
 {
@@ -24,29 +23,60 @@ class MensagemController
 
     public function index(Request $request, Response $response, $args)
     {   
-            
-        $page = $request->getQueryParam('page',1);
-
-        $itemsPerPage = 50;
-
-        $mensagens = Mensagem::groupBy('numero')
-                        ->orderBy('id','desc')
-                        ->skip($itemsPerPage * ($page - 1))
-                        ->take($itemsPerPage)->get();
-
-
-        $totalItems = Mensagem::groupBy('numero')->count();
-
-        $urlPattern = '/mensagens?page=(:num)';
+        $mensagens = Mensagem::where('tipo_envio','RAPIDA')
+                                ->groupBy('numero')
+                                ->orderBy('id','desc')->get();
 
         return $this->app->view->render($response, 'mensagens/mensagens.twig',['mensagens'=>$mensagens]);
     }
 
     public function enviar(Request $request, Response $response, $args)
     {   
-        $canais= Canal::all();
-        return $this->app->view->render($response, 'envio.twig',['canais'=>$canais]);
+
+        $dongleCommand = new DongleCommand();
+
+        $channels = [];
+
+        try{
+            // busca lista de devices
+            $channels = $dongleCommand->getListChannel();  
+
+        }catch(\Exception $ex){
+            $this->app->flash->addMessage('error', $ex->getMessage());
+        }
+
+        return $this->app->view->render($response, 'envio.twig',['channels'=>$channels]);
     }
+
+    public function enviarRapido(Request $request, Response $response)
+    {
+        $data =  $request->getParsedBody();
+
+        $dongleCommand = new DongleCommand();
+
+
+        $mensagem = new Mensagem();
+
+        $mensagem->status     = 'e';
+        $mensagem->data       = date("y-m-d");
+        $mensagem->hora       = date("H:i:s");
+        $mensagem->interface  = $data['interface'];
+        $mensagem->numero     = $data['telefone'];
+        $mensagem->mensagem   = base64_encode($data['mensagem']);
+        $mensagem->tipo_envio = 'RAPIDA';
+
+        if($mensagem->save()){
+            
+            $dongleCommand->sendSMS($mensagem->numero,$mensagem->mensagem,$mensagem->interface);
+
+            $this->app->flash->addMessage('success',"Enviado para fila de sms.");
+        }
+
+        $this->app->flash->addMessage('success',"Enviado para fila de sms.");
+        
+        //return $response->withStatus(200)->withHeader('Location', '/mensagens/enviar');
+    }
+
 
     // Rederiza pagina com detalhes da mensagens.
     public function detalheMensagens(Request $request, Response $response, $args)
@@ -55,14 +85,7 @@ class MensagemController
 
         $numero = trim($args['numero']);
 
-        return $this->app
-        			->view
-        			->render($response, 
-        				'detalhe_msg.twig',
-        					[
-        						'canais'=>$canais,
-        						'numero'=>$numero
-        						]);
+        return $this->app->view->render($response,'detalhe_msg.twig',['canais'=>$canais,'numero'=>$numero]);
     }
 
 
@@ -70,9 +93,6 @@ class MensagemController
 
     public function buscarMensagens(Request $request,Response $response,$args)
     {
-        //$limit = 10;
-        //$offset = $request->getQueryParam('offset');
-
         $numero = $args['numero'];
 
         $mensagens = Mensagem::where('numero','=',$numero)->get();
