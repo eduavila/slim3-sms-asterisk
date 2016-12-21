@@ -1,9 +1,9 @@
 <?php
 
 //Configuração acesso asterisk 
-$settings = array(
-    'host'      => 'localhost',
-    'port'      => '8889',
-    'username'  => 'root',
-    'password'  => 'root'
-);
+return [
+    'host'      => '192.168.1.105',
+    'port'      => '5038',
+    'username'  => 'admin',
+    'password'  => '03496610'
+];

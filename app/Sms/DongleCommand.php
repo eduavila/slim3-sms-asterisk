@@ -14,13 +14,16 @@ class DongleCommand{
     protected $password;
 
     public function __construct(){
+
+        $settings = require __DIR__ . '/../config/dongle.php';
+        
         // Inicia class interface com AMI.
         $this->ami = new \PHPAMI\Ami();
 
-        $this->server = '192.168.1.114';
-        $this->port = '5038';
-        $this->username = 'admin';
-        $this->password = '03496610';
+        $this->server   = $settings['host'];
+        $this->port     = $settings['port'];
+        $this->username = $settings['username'];
+        $this->password = $settings['password'];
     }
 
     //Enviar SMS
