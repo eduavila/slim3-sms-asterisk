@@ -14,8 +14,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/"
-        },
-        "classmap": ["lib/floAPI.php"]
+        }
     },
     "require": {
         "slim/slim": "^3.0",
