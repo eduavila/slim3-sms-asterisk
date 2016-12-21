@@ -13,20 +13,23 @@
         <table id="campanhas" class="ui celled table datatable" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th width="25px">#</th>
                     <th>Nome</th>
-                    <th>Grupo Contratos</th>
-                    <th>Quantidade SMS</th>
+                    <th width="15px">Quantidade contato</th>
                     <th>Ação</th>
                 </tr>
             </thead>
             <tbody>
                 {% for campanha in campanhas %}
                     <tr>
-                        <td><a href="">{{ campanha.id_campanha_id }}</a></td>                  
+                        <td>{{ campanha.id_campanha_id }}</td>                  
                         <td>{{ campanha.nome_campanha }}</td>
-                        <td></td>
-                        <td></td>
+                        <td >{{campanha.qtd_contato}}</td>
+                        <td class="btn-acoes">
+                            <a class="ui teal buttons" href="{{ path_for('campanhas_detalhe',{'campanha': campanha.id_campanha_id }) }}">
+                                <div class="ui button">Visualizar</div> 
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

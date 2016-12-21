@@ -35,7 +35,7 @@ $app->post('/mensagens/{numero}/enviar','App\Controllers\MensagemController:envi
 $app->get('/campanhas','App\Controllers\CampanhaController:index')->setName('campanhas');
 $app->get('/campanhas/nova','App\Controllers\CampanhaController:novo')->setName('campanhas_nova');
 $app->post('/campanhas/nova','App\Controllers\CampanhaController:salvar')->setName('campanhas_salvar');
-
+$app->get('/campanhas/{campanha}/detalhe','App\Controllers\CampanhaController:detalhe')->setName('campanhas_detalhe');
 
 // Canais / Channel.
 $app->get('/canais','App\Controllers\ChannelController:index')->setName('channels');

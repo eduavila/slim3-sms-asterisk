@@ -27,7 +27,10 @@ h1 {
 .btn-acoes{
     width: 10%;
 }
-
+#mensagens_campanha{
+    margin-top: 20px;
+    font-size: 12px;
+}
 
 /*
 .chatBox{

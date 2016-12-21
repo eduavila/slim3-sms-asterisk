@@ -1,0 +1,55 @@
+{% extends "template.twig" %}
+
+{% block body %}
+<div class="ui secondary pointing fluid menu">
+    <h2 class="ui header">Detalhe</h2>
+</div>
+<div class="sixteen wide sales column">
+    
+    {% include 'notificacao.twig' only %}
+    <div class="ui form">
+             
+    <input type="hidden" id="id" value="{{campanha.id_campanha_id}}">
+        <div class="two fields">
+            
+            <div class="field">
+                <label>Nome Campanha * </label>
+                <input type="text" name="nome" tabindex="1" value="{{ campanha.nome_campanha }}" readonly>
+                
+                <label>Modelo</label>
+                <input type="text" name="nome" tabindex="1" value="{{ campanha.modelo_id }}" readonly>
+            </div>
+            <div class="field">
+                 <label>Mensagem *</label>
+                <textarea tabindex="2" name="msg" readonly>{{campanha.texto}}</textarea>
+            </div>
+        </div>        
+    </div>
+
+    <div class="field">
+        <table id="mensagens_campanha" class="ui celled table" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th width="25px">#</th>
+                    <th>Número</th>
+                    <th>Data/Hora</th>
+                    <th>Status</th>
+                    <th>Enviado em</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for mensagem in mensagens %}
+                    <tr>
+                        <td>{{ mensagem.id }}</td>                  
+                        <td>{{ mensagem.numero }}</td>
+                        <td>{{ mensagem.data}} {{ mensagem.hora}}</td>
+                        <td>{{ mensagem.queue_status}}</td>
+                        <td>{{ mensagem.enviada_em}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+

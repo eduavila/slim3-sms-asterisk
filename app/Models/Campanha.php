@@ -19,4 +19,6 @@ class Campanha extends Model{
     
     protected $primaryKey='id_campanha_id';
 
+    public $timestamps = false;
+
 }
