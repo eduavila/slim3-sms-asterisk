@@ -22,10 +22,8 @@
         "slim/flash": "^0.1.0",
         "illuminate/database": "v4.2.9",
         "monolog/monolog": "^1.13",
-        "marcelog/pami": "^2.0",
         "ofbeaton/phpami": "^0.6.3",
         "jasongrimes/paginator": "1.0.1",
-        "marcelog/pagi": "2.*",
         "teraone/twig-strftime-extension": "^1.0"
     }
 }

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3dcf11540209eb3a6192634dacdb3c06",
-    "content-hash": "57ed391b90c02757af0295c32614b410",
+    "hash": "bf160c02a4e0e9740d54133a224dc84c",
+    "content-hash": "83f2de0c78fc0c201f287f93970dc172",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -267,133 +267,6 @@
                 "paginator"
             ],
             "time": "2014-10-13 01:34:54"
-        },
-        {
-            "name": "marcelog/pagi",
-            "version": "v2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/marcelog/PAGI.git",
-                "reference": "3293664da3265808fa3915ecda3ba1cf98ea12a3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/marcelog/PAGI/zipball/3293664da3265808fa3915ecda3ba1cf98ea12a3",
-                "reference": "3293664da3265808fa3915ecda3ba1cf98ea12a3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "psr/log": ">= 1.0.0"
-            },
-            "require-dev": {
-                "codeclimate/php-test-reporter": "dev-master",
-                "evert/phpdoc-md": "~0.1.1",
-                "monolog/monolog": "1.*",
-                "phing/phing": "2.*",
-                "phpdocumentor/phpdocumentor": "2.*",
-                "phpmd/phpmd": "2.*",
-                "phpunit/phpunit": "4.*",
-                "satooshi/php-coveralls": "0.*",
-                "sebastian/phpcpd": "*",
-                "squizlabs/php_codesniffer": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "PAGI\\": "src/PAGI"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Marcelo Gornstein",
-                    "email": "marcelog@gmail.com",
-                    "homepage": "http://marcelog.github.com/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Asterisk Gateway Interface (AGI) client for PHP, suitable to make telephony applications using call flow nodes",
-            "homepage": "http://marcelog.github.com/PAGI",
-            "keywords": [
-                "agi",
-                "asterisk",
-                "call",
-                "client",
-                "flow",
-                "ivr",
-                "node",
-                "telephony",
-                "voip"
-            ],
-            "time": "2016-01-03 21:43:58"
-        },
-        {
-            "name": "marcelog/pami",
-            "version": "v2.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/marcelog/PAMI.git",
-                "reference": "61e58601c08731f754d21f5077000e034492f587"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/marcelog/PAMI/zipball/61e58601c08731f754d21f5077000e034492f587",
-                "reference": "61e58601c08731f754d21f5077000e034492f587",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "psr/log": ">= 1.0.0"
-            },
-            "require-dev": {
-                "codeclimate/php-test-reporter": "dev-master",
-                "evert/phpdoc-md": "~0.1.1",
-                "marcelog/pagi": "2.*",
-                "monolog/monolog": "1.*",
-                "phing/phing": "2.*",
-                "phpdocumentor/phpdocumentor": "2.*",
-                "phpmd/phpmd": "2.*",
-                "phpunit/phpunit": "4.*",
-                "satooshi/php-coveralls": "1.0.1",
-                "sebastian/phpcpd": "*",
-                "squizlabs/php_codesniffer": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "PAMI\\": "src/PAMI"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache2"
-            ],
-            "authors": [
-                {
-                    "name": "Marcelo Gornstein",
-                    "email": "marcelog@gmail.com",
-                    "homepage": "http://marcelog.github.com/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Asterisk Manager Interface (AMI) client for PHP, event driven, object oriented",
-            "homepage": "http://marcelog.github.com/PAMI",
-            "keywords": [
-                "action",
-                "ami",
-                "asterisk",
-                "client",
-                "event",
-                "manager",
-                "monitor",
-                "telephony",
-                "voip"
-            ],
-            "time": "2016-11-09 23:38:05"
         },
         {
             "name": "monolog/monolog",
@@ -815,16 +688,16 @@
         },
         {
             "name": "slim/slim",
-            "version": "3.6.0",
+            "version": "3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "a685fe91a9435e1432e8eeb7cf516e2f5cee7f64"
+                "reference": "4254e40d81559e35cdf856bcbaca5f3af468b7ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/a685fe91a9435e1432e8eeb7cf516e2f5cee7f64",
-                "reference": "a685fe91a9435e1432e8eeb7cf516e2f5cee7f64",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/4254e40d81559e35cdf856bcbaca5f3af468b7ef",
+                "reference": "4254e40d81559e35cdf856bcbaca5f3af468b7ef",
                 "shasum": ""
             },
             "require": {
@@ -874,14 +747,14 @@
                 }
             ],
             "description": "Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs",
-            "homepage": "http://slimframework.com",
+            "homepage": "https://slimframework.com",
             "keywords": [
                 "api",
                 "framework",
                 "micro",
                 "router"
             ],
-            "time": "2016-11-20 20:48:49"
+            "time": "2016-12-20 20:30:47"
         },
         {
             "name": "slim/twig-view",
@@ -994,16 +867,16 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v3.2.0",
+            "version": "v3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "64ab6fc0b42e5386631f408e6adcaaff8eee5ba1"
+                "reference": "5fd18eca88f4d187807a1eba083bc99feaa8635b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/64ab6fc0b42e5386631f408e6adcaaff8eee5ba1",
-                "reference": "64ab6fc0b42e5386631f408e6adcaaff8eee5ba1",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/5fd18eca88f4d187807a1eba083bc99feaa8635b",
+                "reference": "5fd18eca88f4d187807a1eba083bc99feaa8635b",
                 "shasum": ""
             },
             "require": {
@@ -1054,7 +927,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2016-11-18 21:17:59"
+            "time": "2016-11-30 14:40:17"
         },
         {
             "name": "teraone/twig-strftime-extension",
@@ -1099,16 +972,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.28.2",
+            "version": "v1.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "b22ce0eb070e41f7cba65d78fe216de29726459c"
+                "reference": "74f723e542368ca2080b252740be5f1113ebb898"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/b22ce0eb070e41f7cba65d78fe216de29726459c",
-                "reference": "b22ce0eb070e41f7cba65d78fe216de29726459c",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/74f723e542368ca2080b252740be5f1113ebb898",
+                "reference": "74f723e542368ca2080b252740be5f1113ebb898",
                 "shasum": ""
             },
             "require": {
@@ -1121,7 +994,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.28-dev"
+                    "dev-master": "1.29-dev"
                 }
             },
             "autoload": {
@@ -1156,7 +1029,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-11-23 18:41:40"
+            "time": "2016-12-13 17:28:18"
         }
     ],
     "packages-dev": [],
