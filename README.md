@@ -23,7 +23,9 @@ Executa a cada 2 minuto, e joga resultado no arquivo.
 </Directory>
 ~~~
 
-### Iniciar instalação.
-1. `$ git clone git clone https://eduavila@bitbucket.org/eduavila/sms_asterisk.git`
-2. `$  php composer.phar install` Instalar dependencia PHP.
-3. Browse to http://localhost:8888
+
+
+
+####Configurando CRON.
+1. `$ crontab -e`
+2. `*/2 * * * * php /var/www/sms_asterisk/app/Sms/QueueExec.php  >> /var/www/sms_asterisk/log/cron/crontab.log`

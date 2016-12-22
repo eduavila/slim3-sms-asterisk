@@ -42,7 +42,7 @@ class DongleCommand{
         }
         
         if($uiid){
-            $cod = (string) uniqid();
+            $cod = (string) md5(uniqid(rand(), true));
             $mensagem .= "-".substr($cod,0,3);
         }
         // Executa comando !!   "dongle sms $interf $numer $mensag"

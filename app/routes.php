@@ -24,6 +24,8 @@ $app->get('/contatos','App\Controllers\ContatoController:index')->setName('conta
 
 $app->get('/contatos/novo','App\Controllers\ContatoController:novo')->setName('contatos_novo');
 
+$app->post('/contatos/novo','App\Controllers\ContatoController:salvar')->setName('contatos_salvar');
+
 $app->get('/contatos/{contato}/editar','App\Controllers\ContatoController:editar')->setName('contatos_edit');
 
 $app->post('/contatos/{contato}/atualizar','App\Controllers\ContatoController:update')->setName('contatos_update');

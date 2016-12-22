@@ -43,11 +43,17 @@
                     <tr>
                         <td>{{ mensagem.id }}</td>                  
                         <td>{{ mensagem.numero }}</td>
-                        <td>{{ mensagem.data}} {{ mensagem.hora}}</td>
-                        <td>{{ mensagem.queue_status}}</td>
+                        <td>{{ mensagem.data |date("d/m/Y") }} {{ mensagem.hora }} </td>
+                        <td>{{ mensagem.queue_status }}</td>
+                        <td>
+                            {% if mensagem.enviada_em %} 
+                                {{ mensagem.enviada_em |date("d/m/Y H:i:s")}}
+                            {% endif %}
+                        </td>
                         <td>
                             {#<button class="negative ui button"></button>#}
                         </td>
+
                     </tr>
                 {% endfor %}
             </tbody>

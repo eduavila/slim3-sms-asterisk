@@ -33,12 +33,12 @@ class Queue{
                 
                 if($result['status'] === true){
 
-                    $this->mark_complete($task['id']);
+                    $this->mark_complete($task['id'],$channel);
                 
                     echo date('H:i:s')."- Sms send id {$task['id']} complete.<br>";
                 
                 }else{
-                    $this->mark_error($task['id'],$result['msg']['data']);  
+                    $this->mark_error($task['id'],$channel,$result['msg']['data']);  
             
                     echo date('H:i:s')." - Sms send id {$task['id']} not complete.<br>";
                 }
@@ -64,19 +64,21 @@ class Queue{
         return '';
     }
 
-    private function mark_complete($task_id) {
+    private function mark_complete($task_id,$dongle){
         $msg = Mensagem::find($task_id);
         $msg->enviada_em = date('y-m-d H:i:s');
+        $msg->interface= $dongle;
         $msg->queue_status = 'ENVIADA';
         $msg->save();
     }   
     
-    private function mark_error($task_id,$queue_error){
+    private function mark_error($task_id,$inteface,$queue_error){
 
         $msg = Mensagem::find($task_id);
         $msg->enviada_em = date('y-m-d H:i:s');
         $msg->queue_status = 'ERRO';
         $msg->queue_error = $queue_error;
+        $msg->interface = $inteface;
         $msg->save();
     }    
     private function get_tasks(){

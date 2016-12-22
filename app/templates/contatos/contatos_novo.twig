@@ -7,9 +7,9 @@
 <div class="sixteen wide sales column">
     {% include 'notificacao.twig' only %}
     
-    <form class="ui form" id="contato-form" name="contato-form" method="POST" action="{{ path_for('contatos_update',{'contato': contato.id }) }}">
-        
-        <h4 class="ui dividing header">Editar Contato</h4>    
+    <form class="ui form" id="contato-form" name="contato-form" method="POST" 
+            action="{{ path_for('contatos_salvar') }}">
+
         <input type="hidden" id="id" value="{{contato.id}}">
 
         <div class="two fields">
@@ -19,7 +19,7 @@
             </div>
             <div class="field">
                 <label>Número</label>
-                <input type="text" id="phone-number" name="phone" placeholder="(XX)XXXX-XXXX" value="{{contato.numero}}" maxlength="13" tabindex="1">
+                <input type="text" name="telefone" placeholder="(XX)XXXX-XXXX" value="{{contato.numero}}" maxlength="13" tabindex="1">
             </div>
         </div>
         <div class="two fields">
@@ -33,7 +33,7 @@
             <label>Observação</label>
             <textarea tabindex="2">{{contato.obs}}</textarea>
         </div>
-        <button class="ui button left" tabindex="3"  type="submit"  value="Submit">Salvar</button>
+        <button class="ui button left" tabindex="3"  type="submit" value="Submit">Salvar</button>
     </form>
 </div>
 {% endblock %}

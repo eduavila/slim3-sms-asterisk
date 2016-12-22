@@ -19,4 +19,5 @@ class Contato extends Model{
     
     protected $primaryKey='id_contato_id';
 
+    public $timestamps = false;
 }
