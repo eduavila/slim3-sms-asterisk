@@ -2,6 +2,7 @@ $(document)
   .ready(function(){
 
     $('.datatable').DataTable({
+        "order": [[1, "asc" ]],
         "language": {
             "sEmptyTable": "Nenhum registro encontrado",
             "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",

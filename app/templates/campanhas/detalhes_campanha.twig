@@ -9,15 +9,13 @@
     {% include 'notificacao.twig' only %}
     <div class="ui form">
              
-    <input type="hidden" id="id" value="{{campanha.id_campanha_id}}">
+        <input type="hidden" id="id" value="{{campanha.id_campanha_id}}">
         <div class="two fields">
-            
             <div class="field">
                 <label>Nome Campanha * </label>
                 <input type="text" name="nome" tabindex="1" value="{{ campanha.nome_campanha }}" readonly>
-                
-                <label>Modelo</label>
-                <input type="text" name="nome" tabindex="1" value="{{ campanha.modelo_id }}" readonly>
+                <label>Canal</label>
+                <input type="text" name="interface" tabindex="1" value="{{ campanha.interface }}" readonly>
             </div>
             <div class="field">
                  <label>Mensagem *</label>
@@ -53,7 +51,6 @@
                         <td>
                             {#<button class="negative ui button"></button>#}
                         </td>
-
                     </tr>
                 {% endfor %}
             </tbody>

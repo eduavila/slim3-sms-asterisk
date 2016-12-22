@@ -11,10 +11,7 @@ use Slim\Slim as Slim;
 use App\Models\Canal;
 use App\Models\Campanha;
 use App\Models\Mensagem;
-
-use JasonGrimes\Paginator;
-
-use Illuminate\Support\Facades\DB;
+use App\Sms\DongleCommand;
 
 class CampanhaController
 {
@@ -39,7 +36,19 @@ class CampanhaController
 
     public function novo(Request $request, Response $response, $args)
     {   
-        return $this->app->view->render($response, 'campanhas/nova_campanha.twig');
+
+        $dongleCommand = new DongleCommand();
+
+        $channels = [];
+
+        try{
+            // busca lista de devices
+            $channels = $dongleCommand->getListChannel('',true);      
+        }catch(\Exception $ex){
+            $this->app->flash->addMessage('error', $ex->getMessage());
+        }
+
+        return $this->app->view->render($response, 'campanhas/nova_campanha.twig',['channels'=>$channels]);
     }
 
     public function salvar(Request $request, Response $response, $args)
@@ -53,15 +62,15 @@ class CampanhaController
         $campanha = new Campanha();
         $campanha->nome_campanha = $data['nome'];
         $campanha->texto = $data['msg'];
-       
+        $campanha->interface = $data['interface'];
+
         if(!$campanha->save()){
             $this->app->flash->addMessage('error',"Ocorreu erro.");
             $url = $this->app->get('router')->pathFor('campanhas_nova');
 
             return $response->withStatus(302)->withHeader('Location', $url);
         }
-
-
+        
         foreach($listaNumero  as $row)
         {   
             $contato = explode(",",$row);
@@ -76,6 +85,7 @@ class CampanhaController
             $mensagem->mensagem    = base64_encode($mensagemFinal);
             $mensagem->tipo_envio  = 'CAMPANHA';
             $mensagem->campanha_id = $campanha->id_campanha_id;
+            $mensagem->interface   = $data['interface'];
             $mensagem->queue_status = 'PROCESSANDO';
             $mensagem->save();
         }    
@@ -115,14 +125,14 @@ class CampanhaController
         return $response->withStatus(302)->withHeader('Location', $url);
     
     }
-    public function editar(Request $request, Response $response, $args)
-    {   
-        $id_contato = $request->getAttribute('contato');
+    // public function editar(Request $request, Response $response, $args)
+    // {   
+    //     $id_contato = $request->getAttribute('contato');
 
-        $contato = Contato::find($id_contato);
+    //     $contato = Contato::find($id_contato);
 
-        return $this->app->view->render($response, 'contatos/contatos_novo.twig',['contato'=>$contato]);
-    }
+    //     return $this->app->view->render($response, 'contatos/contatos_novo.twig',['contato'=>$contato]);
+    // }
 
     public function update(Request $request, Response $response)
     {   

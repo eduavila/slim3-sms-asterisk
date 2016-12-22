@@ -28,8 +28,7 @@ class Queue{
             
             }else{
 
-                $result = $this->dongleCommand->sendSms($task['numero'],$task['mensagem'],$channel,true);
-              
+                $result = $this->dongleCommand->sendSms($task['numero'],$task['mensagem'],$task['interface'],true);
                 
                 if($result['status'] === true){
 
