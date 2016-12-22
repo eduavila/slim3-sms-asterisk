@@ -29,7 +29,7 @@ class DashboardController
     	$totRecebidas = Mensagem::where('status','r')->count();
     	$totContatos = Contato::count();
 
-    	$messagens = Mensagem::orderBy('data','desc')->orderBy('hora','desc')->limit(5)->get();
+        $messagens = Mensagem::where('tipo_envio','RAPIDA')->orderBy('data','desc')->orderBy('hora','desc')->limit(5)->get();
 
         return $this->app->view->render($response, 'dashboard.twig',[
         										'totEnviadas'=>$totEnviadas,

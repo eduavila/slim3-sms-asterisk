@@ -29,3 +29,16 @@ Executa a cada 2 minuto, e joga resultado no arquivo.
 ####Configurando CRON.
 1. `$ crontab -e`
 2. `*/2 * * * * php /var/www/sms_asterisk/app/Sms/QueueExec.php  >> /var/www/sms_asterisk/log/cron/crontab.log`
+
+
+
+####Configuraçao asterisk
+~~~
+exten => sms,1,Verbose(Recebendo SMS deM ${CALLERID(num)} ${BASE64_DECODE(${SMS_BASE64})})                                                
+;exten => sms,n,System(echo '${STRFTIME(${EPOCH},,%Y-%m-%d %H:%M:%S)} - ${DONGLENAME} -  ${CALLERID(num)}:  ${BASE64_DECODE(${SMS_BASE64})}' >> /var/log/ast
+erisk/sms.txt)
+exten => sms,n,System(mysql -u root -p03496610 -D sms_aste -e "INSERT INTO mensagens (status,data,hora,interface,numero,mensagem) VALUES ('r','${STRFTIME(${EPOCH
+},,%Y-%m-%d)}','${STRFTIME(${EPOCH},,%H:%M:%S)}','${DONGLENAME}','${CALLERID(num)}','${SMS_BASE64}')")
+exten => sms,n,Hangup()
+
+~~~
