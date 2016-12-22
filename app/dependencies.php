@@ -2,8 +2,12 @@
 
 use App\Models\Contato;
 use App\Models\Mensagem;
+use App\Models\Campanha;
 // DIC configuration
 // 
+
+setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+date_default_timezone_set('America/Cuiaba');
 
 $container = $app->getContainer();
 
@@ -25,6 +29,10 @@ $container['view'] = function($c){
     // Add extensions
     $view->addExtension(new Slim\Views\TwigExtension($c->get('router'), $c->get('request')->getUri()));
     $view->addExtension(new Twig_Extension_Debug());
+    // Extençao data 
+    $view->addExtension(new Teraone\Twig\Extension\StrftimeExtension());
+    //$view->getExtension('core')->setTimezone('America/Cuiaba');
+
 
     $env = $view->getEnvironment();
     $env->addGlobal('messages', $c->get('flash')->getMessages());
@@ -35,7 +43,10 @@ $container['view'] = function($c){
     
     $env->addGlobal('tot_contatos',Contato::count());
     $env->addGlobal('tot_msg',Mensagem::count());
-    
+    $env->addGlobal('tot_campanhas',Campanha::count());
+
+    $env->addFunction('replace', new Twig_Function_Function('replace'));
+
     return $view;
 };
 
@@ -69,9 +80,3 @@ $container['logger'] = function ($c) {
 $container[App\Action\HomeAction::class] = function ($c) {
     return new App\Action\HomeAction($c->get('view'), $c->get('logger'));
 };
-
-
-
-
-//
-date_default_timezone_set('America/Cuiaba');

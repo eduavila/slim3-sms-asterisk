@@ -25,6 +25,7 @@
         "marcelog/pami": "^2.0",
         "ofbeaton/phpami": "^0.6.3",
         "jasongrimes/paginator": "1.0.1",
-        "marcelog/pagi": "2.*"
+        "marcelog/pagi": "2.*",
+        "teraone/twig-strftime-extension": "^1.0"
     }
 }

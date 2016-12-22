@@ -35,6 +35,7 @@
                     <th>Data/Hora</th>
                     <th>Status</th>
                     <th>Enviado em</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,7 +45,9 @@
                         <td>{{ mensagem.numero }}</td>
                         <td>{{ mensagem.data}} {{ mensagem.hora}}</td>
                         <td>{{ mensagem.queue_status}}</td>
-                        <td>{{ mensagem.enviada_em}}</td>
+                        <td>
+                            {#<button class="negative ui button"></button>#}
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

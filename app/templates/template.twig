@@ -18,8 +18,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 
-
-    <script src="{{ base_url() }}/js/simplesMenssagem.js"></script>
     <script src="{{ base_url() }}/js/admin.js"></script>
     <script src="{{ base_url() }}/js/chat.js"></script>
 
@@ -57,7 +55,7 @@
       </a>
       <a class="{{ path == '/campanhas' ? 'active' : '' }} item" href="{{ path_for('campanhas') }}">
         Campanhas
-        <div class="ui label">2</div>
+        <div class="ui label">{{tot_campanhas}}</div>
       </a>   
     </div>
 
@@ -91,13 +89,12 @@
             <div class="ui label">{{tot_contatos}}</div>
           </a>
           <a class="{{ path == '/campanhas/nova' ? 'active' : '' }} item" href="{{ path_for('campanhas_nova') }}">
-            
               <i class="large Announcement icon"></i> 
               Nova Campanha
           </a>
           <a class="{{ path == '/campanhas' ? 'active' : '' }} item" href="{{ path_for('campanhas') }}">
-            Campanhas
-            <div class="ui label">2</div>
+              Campanhas
+              <div class="ui label">{{tot_campanhas}}</div>
           </a>
           <a class="{{ path == '/canais' ? 'active' : '' }} item" href="{{ path_for('channels') }}">
             <i class="large icon"></i> 

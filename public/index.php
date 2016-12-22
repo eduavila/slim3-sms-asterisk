@@ -5,8 +5,6 @@
 error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 ini_set('display_errors','On');
 
-setlocale(LC_ALL, 'pt_BR');
-
 # === Session
 session_cache_limiter(false);
 @session_start();
@@ -44,3 +42,4 @@ require __DIR__ . '/../app/routes.php';
 
 // Inicia Applicação
 $app->run();
+

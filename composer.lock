@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "14ad27ae8e219cae8f3bee76b786af3c",
-    "content-hash": "a2065c599d9ebaa3132089365501646e",
+    "hash": "3dcf11540209eb3a6192634dacdb3c06",
+    "content-hash": "57ed391b90c02757af0295c32614b410",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -1055,6 +1055,47 @@
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
             "time": "2016-11-18 21:17:59"
+        },
+        {
+            "name": "teraone/twig-strftime-extension",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/teraone/twig-strftime-extension.git",
+                "reference": "742c3b3f97711b7fe3e8abf03fbc4f68aff87661"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/teraone/twig-strftime-extension/zipball/742c3b3f97711b7fe3e8abf03fbc4f68aff87661",
+                "reference": "742c3b3f97711b7fe3e8abf03fbc4f68aff87661",
+                "shasum": ""
+            },
+            "require": {
+                "twig/twig": "1.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Teraone\\Twig": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stefan Gotre",
+                    "email": "gotre@teraone.de",
+                    "homepage": "https://teraone.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "use strftime function in  twig",
+            "time": "2016-03-18 12:22:03"
         },
         {
             "name": "twig/twig",

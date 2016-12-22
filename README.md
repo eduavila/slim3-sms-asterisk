@@ -3,29 +3,27 @@
 Executa a cada 2 minuto, e joga resultado no arquivo.
 ``*/2 * * * * php /Users/Eduardo/Documents/Projetos/sms_rafael/sms/app/Sms/QueueExec.php  >> /Users/Eduardo/Documents/Projetos/sms_rafael/smsteteCron.txt``
 
+### Iniciar APACHE.
+1. Criar pasta de projeto  `$ mkdir /var/www/`
+2. Adicionar permisoes nas pasta
+    `$ sudo chown -R $USER:$USER  /var/www/sms_asterisk/public`
+    `$ sudo chmod -R 755 /var/www`
+3. Criar arquivos virtual host
+    sudo mkdir /etc/httpd/sites-available
+    sudo mkdir /etc/httpd/sites-enabled
 
-### Run it:
+4. Configurar arquivos `$ vim /etc/httpd/conf/httpd.config`
 
-1. `$ cd my-app`
-2. `$ php -S 0.0.0.0:8888 -t public public/index.php`
+~~~
+<Directory "/var/www">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    # Allow open access:
+    Require all granted
+</Directory>
+~~~
+
+### Iniciar instalação.
+1. `$ git clone git clone https://eduavila@bitbucket.org/eduavila/sms_asterisk.git`
+2. `$  php composer.phar install` Instalar dependencia PHP.
 3. Browse to http://localhost:8888
-
-## Key directories
-
-* `app`: Application code
-* `app/src`: All class files within the `App` namespace
-* `app/templates`: Twig template files
-* `cache/twig`: Twig's Autocreated cache files
-* `log`: Log files
-* `public`: Webserver root
-* `vendor`: Composer dependencies
-
-## Key files
-
-* `public/index.php`: Entry point to application
-* `app/settings.php`: Configuration
-* `app/dependencies.php`: Services for Pimple
-* `app/middleware.php`: Application middleware
-* `app/routes.php`: All application routes are here
-* `app/src/Action/HomeAction.php`: Action class for the home page
-* `app/templates/home.twig`: Twig template file for the home page

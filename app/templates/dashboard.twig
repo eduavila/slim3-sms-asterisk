@@ -11,8 +11,8 @@
         </div>
     </div>
 
-    <h1 class="ui header datetime">
-        {{ "now"| date('j F Y, g:i a') }}
+    <h1 class="ui header">
+        {{ date()|strftime('%d %t de  %B de  %Y') }} 
     </h1>
 
     <div class="ui three column row">
@@ -121,18 +121,28 @@
 
         <div class="doughnut-chart column">
             <div class="ui segments">
-            <div class="ui segment">
-                <h3 class="ui blue header">Gráfico</h3>
-            </div>
-            <div class="ui segment">
-                <canvas id="doughnuts_are_tasty" width="200" height="179" style="width: 200px; height: 179px;"></canvas>
-                <ul id="dashboard_legend">
-                    <ul class="doughnut-legend">
-                        <li><span style="background-color:#F7464A"></span>Recebida</li>
-                        <li><span style="background-color:#46BFBD"></span>Enviadas</li>
+
+                <div class="ui segment">
+                    <h3 class="ui blue header">Gráfico</h3>
+                </div>
+                <div class="ui segment">
+                    <canvas id="chart_sms" width="200" height="179" style="width: 200px; height: 179px;" 
+                        data-smsenviadas="{{ totEnviadas }}"
+                        data-smsrecebidas="{{ totRecebidas }}"></canvas>
+
+                    <ul id="dashboard_legend">
+                        <ul class="doughnut-legend">
+                            <li>
+                                <span style="background-color:#F7464A"></span>
+                                Recebida
+                            </li>
+                            <li>
+                                <span style="background-color:#46BFBD"></span>
+                                Enviadas
+                            </li>
+                        </ul>
                     </ul>
-                </ul>
-            </div>
+                </div>
             </div>
         </div>
     </div>

@@ -27,7 +27,8 @@ $(document)
         }
       });
 
-    $('.ui.dropdown').dropdown();
+    
+    
     
     // Sidebar 
     $("a.sidebar-toggle")
@@ -35,29 +36,32 @@ $(document)
         $('.ui.sidebar').sidebar('toggle');
       });
 
-    $("input:text").click(function() {
+    $("input:text").click(function(){
       $(this).parent().find("input:file").click();
     });
 
+    // input de file
     $('input:file', '.ui.action.input')
       .on('change', function(e) {
         var name = e.target.files[0].name;
         $('input:text', $(e.target).parent()).val(name);
       });
 
+    //Botao dropdown
     $('select.dropdown').dropdown();
 
     //Button
     $('.ui.checkbox')
       .checkbox()
       .change(function(item){
-        event.preventDefault();
-        if($(this).is('.checked'))
-        {
-          $("#nome").show();
-        }else{
-          $("#nome").hide();
-        }
+          event.preventDefault();
+          
+          if($(this).is('.checked'))
+          {
+              $("#nome").show();
+          }else{
+              $("#nome").hide();
+          }
       }); 
 
       //Mascara Tel
@@ -69,33 +73,42 @@ $(document)
           $(this).closest('.message').transition('fade');
       });
 
-      function resizeGraphs() {
-          var salesChart = $("#sales_chart");
-          var table = $("<div class='ui'></div>.table");
-          salesChart.css("width", table.width());
-      }
 
-      function setupDoughnut(){
 
-        var ctx = document.getElementById("doughnuts_are_tasty").getContext("2d");
-        var data = [
-          {
-              value: 40,
-              color:"#F7464A",
-              highlight: "#FF5A5E",
-              label: "Enviadas"
-          },
-          {
-              value: 50,
-              color: "#46BFBD",
-              highlight: "#5AD3D1",
-              label: "Recebidas"
-          }
-        ];
+      // Grafico de mensagens
+      function initChart(){
+
+          var ctx = document.getElementById("chart_sms").getContext("2d");
+          var $chart = $(chart_sms);
+
+          var recebidas = parseFloat($chart.data("smsenviadas"));
+          var enviadas = parseFloat($chart.data("smsrecebidas"));
+          
+          var pRecebida = (enviadas * 100)/ (recebidas + enviadas);
+          var pEnviada =  (recebidas * 100)/ (recebidas + enviadas);
+
+          var data = [
+            {
+                value: pEnviada,
+                color:"#F7464A",
+                highlight: "#FF5A5E",
+                label: "Enviadas"
+            },
+            {
+                value: pRecebida,
+                color: "#46BFBD",
+                highlight: "#5AD3D1",
+                label: "Recebidas"
+            }
+          ];
 
         var myDoughnutChart = new Chart(ctx).Doughnut(data,{});
 
-        var legendHolder = document.getElementById('dashboard_legend');
-        legendHolder.innerHTML = myDoughnutChart.generateLegend();
+        // legenda..
+        var leg = document.getElementById('dashboard_legend');
+
+        leg.innerHTML = myDoughnutChart.generateLegend();
       }
+
+      initChart();
 });
