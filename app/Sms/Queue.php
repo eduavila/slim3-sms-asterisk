@@ -17,10 +17,15 @@ class Queue{
 
     public function run(){
         
+        if(date('H:i:s') >= '07:00:00' || date('H:i:s') >= '18:00:00'){
+             echo date('H:i:s')." - Não e hora de enviar mensagems \t";
+            exit;
+        }
+
         foreach($this->get_tasks() as $task){
-            $channel = $this->get_channel();
-            
-            if(empty($channel))
+            //$channel = $this->get_channel();
+
+            if(empty($task['interface']))
             {
                 $this->mark_error($task['id'],'devices not found');
 
@@ -32,12 +37,12 @@ class Queue{
                 
                 if($result['status'] === true){
 
-                    $this->mark_complete($task['id'],$channel);
+                    $this->mark_complete($task['id'],$task['interface']);
                 
                     echo date('H:i:s')."- Sms send id {$task['id']} complete.<br>";
                 
                 }else{
-                    $this->mark_error($task['id'],$channel,$result['msg']['data']);  
+                    $this->mark_error($task['id'],$task['interface'],$result['msg']['data']);  
             
                     echo date('H:i:s')." - Sms send id {$task['id']} not complete.<br>";
                 }
