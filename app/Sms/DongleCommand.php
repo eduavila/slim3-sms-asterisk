@@ -15,7 +15,7 @@ class DongleCommand{
 
     public function __construct(){
 
-        $settings = require __DIR__ . '/../config/dongle.php';
+        $settings = require __DIR__ . '/../Config/dongle.php';
         
         // Inicia class interface com AMI.
         $this->ami = new \PHPAMI\Ami();
