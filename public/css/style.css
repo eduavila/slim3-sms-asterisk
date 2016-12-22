@@ -29,6 +29,10 @@ h1 {
     font-size: 12px;
 }
 
+.pagechat{
+    max-height: 400px;
+    position: relative;
+}
 /*.msg-historico{
     height: 60% !important;
 }
@@ -40,3 +44,23 @@ h1 {
 .chatBox{
     position: relative; 
 }*/
+
+/* ClearFix */
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}
