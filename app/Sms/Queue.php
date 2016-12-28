@@ -26,7 +26,7 @@ class Queue{
 
     public function run(){
         
-        if(time() <= strtotime($this->smsSendInitialTime) || time() >= strtotime($this->smsSendEndTime)){
+        if(time() < strtotime($this->smsSendInitialTime) || time() > strtotime($this->smsSendEndTime)){
 
             echo date('H:i:s')." - Não e hora de enviar mensagems. \n";
             exit;
