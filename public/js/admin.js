@@ -2,7 +2,7 @@ $(document)
   .ready(function(){
 
     $('.datatable').DataTable({
-        "order": [[1, "asc" ]],
+        "order": [[0, "desc" ]],
         "language": {
             "sEmptyTable": "Nenhum registro encontrado",
             "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -78,37 +78,39 @@ $(document)
 
       // Grafico de mensagens
       function initChart(){
+        if(document.getElementById("chart_sms")){
+                var ctx = document.getElementById("chart_sms").getContext("2d");
+                var $chart = $(chart_sms);
 
-          var ctx = document.getElementById("chart_sms").getContext("2d");
-          var $chart = $(chart_sms);
+                var recebidas = parseFloat($chart.data("smsenviadas"));
+                var enviadas = parseFloat($chart.data("smsrecebidas"));
+                
+                var pRecebida = (enviadas * 100)/ (recebidas + enviadas);
+                var pEnviada =  (recebidas * 100)/ (recebidas + enviadas);
 
-          var recebidas = parseFloat($chart.data("smsenviadas"));
-          var enviadas = parseFloat($chart.data("smsrecebidas"));
-          
-          var pRecebida = (enviadas * 100)/ (recebidas + enviadas);
-          var pEnviada =  (recebidas * 100)/ (recebidas + enviadas);
+                var data = [
+                    {
+                        value: pEnviada,
+                        color:"#F7464A",
+                        highlight: "#FF5A5E",
+                        label: "Enviadas"
+                    },
+                    {
+                        value: pRecebida,
+                        color: "#46BFBD",
+                        highlight: "#5AD3D1",
+                        label: "Recebidas"
+                    }
+                ];
 
-          var data = [
-            {
-                value: pEnviada,
-                color:"#F7464A",
-                highlight: "#FF5A5E",
-                label: "Enviadas"
-            },
-            {
-                value: pRecebida,
-                color: "#46BFBD",
-                highlight: "#5AD3D1",
-                label: "Recebidas"
-            }
-          ];
+                var myDoughnutChart = new Chart(ctx).Doughnut(data,{});
 
-        var myDoughnutChart = new Chart(ctx).Doughnut(data,{});
+                // legenda..
+                var leg = document.getElementById('dashboard_legend');
 
-        // legenda..
-        var leg = document.getElementById('dashboard_legend');
-
-        leg.innerHTML = myDoughnutChart.generateLegend();
+                leg.innerHTML = myDoughnutChart.generateLegend();
+          }
+         
       }
 
       initChart();

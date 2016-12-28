@@ -2,7 +2,7 @@
 
 date_default_timezone_set('America/Cuiaba');
 
-echo "Exetando Queue: ".date('H:i:s')."\n";
+echo "Executando Queue: ".date('H:i:s')."\n";
 
 // Carrega class disponivel no projeto.
 require __DIR__ . '/../../vendor/autoload.php';

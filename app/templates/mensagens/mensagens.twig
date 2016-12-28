@@ -24,7 +24,7 @@
                             </a>
                         </td>                  
                         <td></td>
-                        <td>{{msg.data}} {{msg.hora}}</td>
+                        <td>{{msg.data|date("d/m/Y")}} {{msg.hora}}</td>
                     </tr>
                 {% endfor %}
             </tbody>

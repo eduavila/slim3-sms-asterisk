@@ -27,7 +27,13 @@ class Mensagem extends Model{
 
     public function dateHora(){
         $date = new DateTime($this->data.''.$this->hora);
-        var_dump($date);
         return $date->format("d-m-Y H:i:s");
+    }
+
+
+    public function scopeGetCountSMSSend($query,$dongle){
+
+        return $query->whereRaw('CAST(enviada_em as DATE) = CAST(now() as DATE)')
+            ->where('queue_status','ENVIADA')->where('interface',$dongle);
     }
 }
