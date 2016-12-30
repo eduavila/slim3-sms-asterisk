@@ -34,7 +34,7 @@ class Queue{
         
         foreach($this->get_tasks() as $task){
 
-            $smsSend = Mensagem::getCountSMSSend($task['interface'])->count();
+            $smsSend = MensagemCampanha::getCountSMSSend($task['interface'])->count();
 
             if($smsSend >= $this->smsSendMaxDay){
                 echo date('H:i:s')." - já foi enviado maximo de sms no dia com interface {$task['interface']} - total enviado:{$smsSend} \n";
@@ -64,8 +64,7 @@ class Queue{
                     echo date('H:i:s')." - Sms ID = {$task['id']} não enviado. \n";
                 }
             }
-    
-            sleep(2);
+            sleep(5);
         }
     }
 
