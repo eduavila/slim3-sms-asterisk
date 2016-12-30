@@ -107,7 +107,7 @@ class Queue{
 
     private function get_tasks(){
 
-        $sms = Mensagem::where('tipo_envio','CAMPANHA')
+        $sms = MensagemCampanha::where('tipo_envio','CAMPANHA')
                         ->where('queue_status','PROCESSANDO')
                         ->orderBy('id','asc')
                         ->get();
