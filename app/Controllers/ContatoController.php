@@ -36,6 +36,7 @@ class ContatoController
     {   
         return $this->app->view->render($response, 'contatos/contatos_novo.twig');
     }
+    
     public function salvar(Request $request, Response $response, $args)
     {
         $data =  $request->getParsedBody();
@@ -63,7 +64,7 @@ class ContatoController
 
         if($contato->save()){
             $this->app->flash->addMessage('success',"Cadastrado com sucesso.");
-            
+        
             $url = $this->app->get('router')->pathFor('contatos');
 
             return $response->withStatus(200)->withHeader('Location', $url);
@@ -75,7 +76,6 @@ class ContatoController
         $url = $this->app->get('router')->pathFor('contatos');
         return $response->withStatus(200)->withHeader('Location', $url);
     }
-
 
     public function editar(Request $request, Response $response, $args)
     {   

@@ -54,7 +54,6 @@ class MensagemController
 
         $dongleCommand = new DongleCommand();
 
-
         $mensagem = new Mensagem();
 
         $mensagem->status     = 'e';
@@ -108,7 +107,7 @@ class MensagemController
     {
         $numero = $args['numero'];
 
-        $mensagens = Mensagem::where('numero','=',$numero)->get();
+        $mensagens = Mensagem::where('tipo_envio','RAPIDA')->where('numero','=',$numero)->get();
 
         return json_encode($mensagens);
     }

@@ -9,3 +9,16 @@
         </ul>
     </div>
 {% endif %}
+
+
+{% if messages.success %}
+    <div class="ui success message">
+        <i class="close icon"></i>
+        <div class="header">Sucesso</div>
+        <ul class="list">
+            {% for item in messages.success %}
+                <li>{{item}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

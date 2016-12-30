@@ -8,16 +8,15 @@
     {% include 'notificacao.twig' only %}
     
     <form class="ui form" id="contato-form" name="contato-form" method="POST" enctype="multipart/form-data" action="{{ path_for('campanhas_salvar') }}">
-        
-        {#<h4 class="ui dividing header">Editar Contato</h4>    #}
         <input type="hidden" id="id" value="{{contato.id_contato_id}}">
-
         <div class="two fields">
             <div class="field">
                 <label>Nome Campanha * </label>
-                <input type="text" name="nome" tabindex="1" value="{{ contato.nome_contato }}">
-                 <div class="field">
-                <label>Canal</label>
+                <div class="ui input focus">
+                    <input type="text" name="nome" tabindex="1" value="{{ contato.nome_contato }}" class="">
+                </div>
+                <div class="field">
+                    <label>Canal</label>
                     <div class="field">
                         <select class="ui fluid search dropdown" tabindex="2" name="interface" value="interface" required>
                             {% for channel in channels %}
@@ -26,32 +25,24 @@
                         </select>
                     </div>
                 </div>
-
-
             </div>
             <div class="field">
                 <label>Número *</label>
                 <textarea tabindex="2" placeholder="Número,Nome contato; Ex: 6599462332,José" name="numeros"></textarea>
-                  <!-- Btn file -->
-                {#<div class="ui action input">
-                    <input type="text" placeholder="Arquivo " readonly>
-                    <input type="file" name="newfile">
-                    <div class="ui icon button">
-                        <i class="attach icon"></i>
-                    </div>
-                </div>#}
             </div>
         </div>        
-            <div class="field">
-                <label>Mensagem *</label>
-                <div class="ui message">
-                    <ul class="list">
+        <div class="field">
+            <label>Mensagem *</label>
+            <div class="ui message">
+                <ul class="list">
                     <li>Para inserir o nome do contato use o parâmetro #NOME# no corpo da mensagem.</li>
-                    </ul>
-                </div>
-                <textarea tabindex="2" name="msg"></textarea>
+                </ul>
             </div>
-        <button class="ui button left" tabindex="3"  type="submit"  value="Submit">Salvar</button>
+            <textarea tabindex="2" name="msg"></textarea>
+        </div>
+        <button class="ui button left" tabindex="3"  type="submit"  value="Submit">
+            Enviar
+        </button>
     </form>
 </div>
 {% endblock %}

@@ -303,3 +303,7 @@ ul.doughnut-legend {
   font-size: 9px;
   color: #1f1f1f;
 }
+
+.btn-cancelar{
+    margin-top: 10px !important;
+}

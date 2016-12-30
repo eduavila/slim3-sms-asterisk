@@ -13,11 +13,11 @@ use Illuminate\Database\Eloquent\Model;
 * @author     Eduardo Avila Malheiro  <edu.avila2@gmail.com>
 */
 
-class Contato extends Model{
+class Config extends Model{
     
-    protected $table = 'contatos';
+    protected $table = 'config';
     
-    protected $primaryKey='id_contato_id';
+    protected $primaryKey='id_config_id';
 
     public $timestamps = false;
 }

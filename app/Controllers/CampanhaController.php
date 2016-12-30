@@ -10,7 +10,7 @@ use Slim\Slim as Slim;
 
 use App\Models\Canal;
 use App\Models\Campanha;
-use App\Models\Mensagem;
+use App\Models\MensagemCampanha;
 use App\Sms\DongleCommand;
 
 class CampanhaController
@@ -24,9 +24,9 @@ class CampanhaController
 
     public function index(Request $request, Response $response)
     {   
-        $campanhas = Campanha::leftJoin('mensagens','mensagens.campanha_id','=','campanhas.id_campanha_id')
+        $campanhas = Campanha::leftJoin('mensagens_campanha','mensagens_campanha.campanha_id','=','campanhas.id_campanha_id')
                                 ->selectRaw('campanhas.*,count(*) as qtd_contato')
-                                ->groupBy('mensagens.campanha_id')
+                                ->groupBy('mensagens_campanha.campanha_id')
                                 ->orderBy('id_campanha_id','desc')
                                 ->get();
         
@@ -37,13 +37,13 @@ class CampanhaController
     public function novo(Request $request, Response $response, $args)
     {   
 
-        $dongleCommand = new DongleCommand();
+       // $dongleCommand = new DongleCommand();
 
-        $channels = [];
+        $channels = [['ID'=>'dongle1'],['ID'=>'dongle2']];
 
         try{
             // busca lista de devices
-            $channels = $dongleCommand->getListChannel('',true);      
+            //$channels = $dongleCommand->getListChannel('',true);      
         }catch(\Exception $ex){
             $this->app->flash->addMessage('error', $ex->getMessage());
         }
@@ -61,13 +61,14 @@ class CampanhaController
 
         $campanha = new Campanha();
         $campanha->nome_campanha = $data['nome'];
-        $campanha->texto = $data['msg'];
-        $campanha->interface = $data['interface'];
+        $campanha->texto         = $data['msg'];
+        $campanha->interface     = $data['interface'];
 
         if(!$campanha->save()){
-            $this->app->flash->addMessage('error',"Ocorreu erro.");
-            $url = $this->app->get('router')->pathFor('campanhas_nova');
 
+            $this->app->flash->addMessage('error',"Ocorreu erro.");
+            
+            $url = $this->app->get('router')->pathFor('campanhas');
             return $response->withStatus(302)->withHeader('Location', $url);
         }
         
@@ -76,23 +77,23 @@ class CampanhaController
             $contato = explode(",",$row);
             $mensagemFinal = str_replace("#NOME#",$contato[1],$msg);
         
-            $mensagem = new Mensagem();
+            $mensagem = new MensagemCampanha();
 
-            $mensagem->status      = 'e';
-            $mensagem->data        = date("y-m-d");
-            $mensagem->hora        = date("H:i:s");
-            $mensagem->numero      = $this->limpaNumero($contato[0]);
-            $mensagem->mensagem    = base64_encode($mensagemFinal);
-            $mensagem->tipo_envio  = 'CAMPANHA';
-            $mensagem->campanha_id = $campanha->id_campanha_id;
-            $mensagem->interface   = $data['interface'];
+            $mensagem->status       = 'e';
+            $mensagem->data         = date("y-m-d");
+            $mensagem->hora         = date("H:i:s");
+            $mensagem->numero       = $this->limpaNumero($contato[0]);
+            $mensagem->mensagem     = base64_encode($mensagemFinal);
+            $mensagem->tipo_envio   = 'CAMPANHA';
+            $mensagem->campanha_id  = $campanha->id_campanha_id;
+            $mensagem->interface    = $data['interface'];
             $mensagem->queue_status = 'PROCESSANDO';
             $mensagem->save();
         }    
     
         $this->app->flash->addMessage('success',"Enviado para fila de sms.");
         
-        $url = $this->app->get('router')->pathFor('campanhas_nova');
+        $url = $this->app->get('router')->pathFor('campanhas');
 
         return $response->withStatus(302)->withHeader('Location', $url);
 
@@ -110,7 +111,7 @@ class CampanhaController
 
         if($campanha){
             
-            $mensagens = Mensagem::where('campanha_id',$id_campanha)->get();
+            $mensagens = MensagemCampanha::where('campanha_id',$id_campanha)->get();
 
             return $this->app->view->render($response, 'campanhas/detalhes_campanha.twig',
                                 ['campanha'=>$campanha,'mensagens'=>$mensagens]);
@@ -120,24 +121,32 @@ class CampanhaController
         // Se nao existir campanha
         $this->app->flash->addMessage('error',"Campanha não encontrada!");
         
+
         $url = $this->app->get('router')->pathFor('campanhas');
+        return $response->withStatus(302)->withHeader('Location', $url);
+    }
+
+    public function cancelar(Request $request,Response $response)
+    {
+        $campanha_id = $request->getAttribute('campanha');
+
+        $campanha = Campanha::find($campanha_id);
+
+        if(!$campanha){
+            $url = $this->app->get('router')->pathFor('campanhas_detalhe',['campanha'=>$campanha_id]);
+            return $response->withStatus(302)->withHeader('Location', $url);
+        }
+        
+        Campanha::where('id_campanha_id',$campanha_id)->update(['status'=>'CANCELADA']);
+        
+        MensagemCampanha::where('campanha_id',$campanha_id)
+                    ->where('queue_status','PROCESSANDO')
+                    ->update(['queue_status'=>'CANCELADO']);
+
+        $this->app->flash->addMessage('success',"Cancelado campanha. ID:".$campanha_id);
+        
+        $url = $this->app->get('router')->pathFor('campanhas_detalhe',['campanha'=>$campanha_id]);
 
         return $response->withStatus(302)->withHeader('Location', $url);
-    
-    }
-    // public function editar(Request $request, Response $response, $args)
-    // {   
-    //     $id_contato = $request->getAttribute('contato');
-
-    //     $contato = Contato::find($id_contato);
-
-    //     return $this->app->view->render($response, 'contatos/contatos_novo.twig',['contato'=>$contato]);
-    // }
-
-    public function update(Request $request, Response $response)
-    {   
-        $this->app->flash->addMessage('error', 'This is a message');
-
-        return $response->withStatus(200)->withHeader('Location', '/contatos');
     }
 }

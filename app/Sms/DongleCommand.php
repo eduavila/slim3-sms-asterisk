@@ -23,7 +23,7 @@ class DongleCommand{
         $this->server   = $settings['host'];
         $this->port     = $settings['port'];
         $this->username = $settings['username'];
-        $this->password = $settings['password'];
+        $this->password = $settings['password']; 
     }
 
     //Enviar SMS
@@ -31,9 +31,9 @@ class DongleCommand{
     public function sendSMS($numero,$mensagem,$dongle,$uiid = false){
 
         if(strlen($mensagem) > 180 && $uiid == false){
-            throw new \Exception('Messagem com texto maior que 180 caracteres');
-        }if(strlen($mensagem) > 176 && $uiid == true) {
-           throw new \Exception('Messagem com texto maior que 176 caracteres');
+            throw new \Exception('Mensagem com texto maior que 180 caracteres');
+        }elseif(strlen($mensagem) > 176 && $uiid == true) {
+           throw new \Exception('Mensagem com texto maior que 176 caracteres');
         } 
     
         if($this->ami->connect($this->server.':'.$this->port, $this->username,$this->password, 'off') === false)

@@ -3,9 +3,7 @@
 use App\Models\Contato;
 use App\Models\Mensagem;
 use App\Models\Campanha;
-// DIC configuration
-// 
-
+ 
 setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 date_default_timezone_set('America/Cuiaba');
 
@@ -31,8 +29,6 @@ $container['view'] = function($c){
     $view->addExtension(new Twig_Extension_Debug());
     // Extençao data 
     $view->addExtension(new Teraone\Twig\Extension\StrftimeExtension());
-    //$view->getExtension('core')->setTimezone('America/Cuiaba');
-
 
     $env = $view->getEnvironment();
     $env->addGlobal('messages', $c->get('flash')->getMessages());

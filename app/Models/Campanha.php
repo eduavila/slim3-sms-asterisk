@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 * 
 * 
 * @package    App
-* @subpackage Controller
+* @subpackage Models
 * @author     Eduardo Avila Malheiro  <edu.avila2@gmail.com>
 */
 

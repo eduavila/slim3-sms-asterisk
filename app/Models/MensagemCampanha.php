@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
-* Mensagem envio de sms.
+* Mensagem envio sms .
 * 
 * 
 * @package    App
@@ -13,9 +13,9 @@ use Illuminate\Database\Eloquent\Model;
 * @author     Eduardo Avila Malheiro  <edu.avila2@gmail.com>
 */
 
-class Mensagem extends Model{
+class MensagemCampanha extends Model{
 
-    protected $table = 'mensagens';
+    protected $table = 'mensagens_campanha';
     
     public $timestamps = false;
 

@@ -2,7 +2,7 @@
 
 {% block body %}
 <div class="ui secondary pointing fluid menu">
-    <h2 class="ui header">Detalhe</h2>
+    <h2 class="ui header">Detalhes</h2>
 </div>
 <div class="sixteen wide sales column">
     
@@ -13,9 +13,13 @@
         <div class="two fields">
             <div class="field">
                 <label>Nome Campanha * </label>
-                <input type="text" name="nome" tabindex="1" value="{{ campanha.nome_campanha }}" readonly>
+                <input type="text" name="nome" tabindex="1" value="{{ campanha.id_campanha_id }} - {{ campanha.nome_campanha }}" readonly>
                 <label>Canal</label>
                 <input type="text" name="interface" tabindex="1" value="{{ campanha.interface }}" readonly>
+
+                {% if campanha.status != 'CANCELADA' %}
+                    <a class="negative ui button btn-cancelar" href="{{ path_for('campanhas_cancelar',{'campanha': campanha.id_campanha_id }) }}">Cancelar Campanha</a>
+                {% endif %}
             </div>
             <div class="field">
                  <label>Mensagem *</label>

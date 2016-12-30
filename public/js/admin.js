@@ -28,9 +28,6 @@ $(document)
         }
       });
 
-    
-    
-    
     // Sidebar 
     $("a.sidebar-toggle")
       .click(function(){
@@ -67,7 +64,7 @@ $(document)
 
       //Mascara Tel
       $("input[name='telefone']").keyup(function() {
-          $(this).val($(this).val().replace(/^(\d{2})(\d{4})(\d)+$/, "($1)$2-$3"));
+          $(this).val($(this).val().replace(/^(\d{2})(\d{5})(\d{4})+$/, "($1)$2-$3"));
       });
       
       $('.message .close').on('click', function() {
@@ -78,6 +75,7 @@ $(document)
 
       // Grafico de mensagens
       function initChart(){
+          
         if(document.getElementById("chart_sms")){
                 var ctx = document.getElementById("chart_sms").getContext("2d");
                 var $chart = $(chart_sms);

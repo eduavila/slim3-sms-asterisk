@@ -19,10 +19,10 @@
             </thead>
             <tbody>
                 {% for campanha in campanhas %}
-                    <tr>
+                    <tr {% if campanha.status == "CANCELADA" %} class="error" {% endif %}> 
                         <td>{{ campanha.id_campanha_id }}</td>                  
                         <td>{{ campanha.nome_campanha }}</td>
-                        <td >{{campanha.qtd_contato}}</td>
+                        <td>{{ campanha.qtd_contato }}</td>
                         <td class="btn-acoes">
                             <a class="ui teal buttons" href="{{ path_for('campanhas_detalhe',{'campanha': campanha.id_campanha_id }) }}">
                                 <div class="ui button">Visualizar</div> 

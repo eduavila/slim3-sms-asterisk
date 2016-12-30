@@ -1,39 +1,31 @@
 <html>
   <head>
-    
     <link rel="stylesheet" type="text/css" href="{{ base_url() }}/lib/semantic/dist/semantic.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ base_url() }}/css/admin.css">
-    <link rel="stylesheet" type="text/css" href="{{ base_url() }}/css/style.css">
     <link rel="stylesheet" type="text/css" href="{{ base_url() }}/css/dataTables.semanticui.min.css">
-    
     <link rel="stylesheet" type="text/css" href="{{ base_url() }}/css/sidebar.css">
     <link rel="stylesheet" type="text/css" href="{{ base_url() }}/css/icon.css">
-
-
+    <link rel="stylesheet" type="text/css" href="{{ base_url() }}/css/admin.css">
+    <link rel="stylesheet" type="text/css" href="{{ base_url() }}/css/style.css">
+    
     <script src="{{ base_url() }}/lib/jquery/dist/jquery.min.js"></script>
     <script src="{{ base_url() }}/lib/semantic/dist/semantic.min.js"></script>
     <script src="{{ base_url() }}/lib/handlebars/handlebars.min.js"></script>
     <script src="{{ base_url() }}/js/jquery.dataTables.min.js"></script>
     <script src="{{ base_url() }}/js/dataTables.semanticui.min.js"></script>
-
     <script src="{{ base_url() }}/js/Chart.min.js"></script>
-
     <script src="{{ base_url() }}/js/admin.js"></script>
     <script src="{{ base_url() }}/js/chat.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
     
     <title>SMS | Mensagens</title>
-
   </head>
-
   <body>
 
     <!-- Sidebar menu - responsive only -->
     <div class="ui sidebar inverted vertical menu">
       <a class="item" href="{{ path_for('index') }}">
         <h4 class="ui grey header">SMS</h4>
-        <!--<p>Sign Out</p>-->
       </a>
       <a class="item" href="{{ path_for('index') }}">
          Dashboard
@@ -65,7 +57,6 @@
         <div class="ui left fixed vertical inverted menu">
           <a class="item" href="">
             <h4 class="ui grey header">SMS <i class="Talk Outline icon"></i></h4>
-            <!--<p>Sign Out</p>-->
           </a>
           <a class="{{ path == '/' ? 'active' : '' }} item" href="{{ path_for('index') }}">
              <i class="large Dashboard icon"></i> Dashboard
@@ -100,12 +91,10 @@
             <i class="large icon"></i> 
             Canais
           </a>
-          {#<a class="{{ path == '/campanhas' ? 'active' : '' }} item" href="{{ path_for('campanhas') }}">
-            Configuração
-            <div class="ui label">2</div>
-          </a>    #}
         </div>
+
         <div class="ui main grid">
+          
           <!-- Responsive top menu -->
           <div class="ui fixed inverted main menu">
             <div class="ui container">
@@ -116,6 +105,7 @@
           </div>
           
           {% block body %}{% endblock %}
+
         </div>
       </div>
     </div>
