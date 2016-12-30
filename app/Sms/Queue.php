@@ -13,6 +13,7 @@ class Queue{
     protected $smsSendMaxDay;   
     protected $smsSendInitialTime;
     protected $smsSendEndTime;
+    protected $smsTime;
 
     public function __construct(){
         $this->dongleCommand = new DongleCommand();
@@ -22,6 +23,7 @@ class Queue{
         $this->smsSendMaxDay        = $settings['sms_send_max_day']; 
         $this->smsSendInitialTime   = $settings['sms_send_initial_time']; 
         $this->smsSendEndTime       = $settings['sms_send_end_time']; 
+        $this->smsTime              = $settings['time_sms'];
     }
 
     public function run(){
@@ -64,7 +66,7 @@ class Queue{
                     echo date('H:i:s')." - Sms ID = {$task['id']} não enviado. \n";
                 }
             }
-            sleep(5);
+            sleep($this->smsTime);
         }
     }
 
