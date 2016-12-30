@@ -38,7 +38,7 @@ class Queue{
         foreach($this->get_tasks() as $task){
 
             $smsSend = MensagemCampanha::getCountSMSSend($task['interface'])->count();
-
+           
             if($smsSend >= $this->smsSendMaxDay){
                 echo date('H:i:s')." - já foi enviado maximo de sms no dia com interface {$task['interface']} - total enviado:{$smsSend} \n";
                 break;
@@ -64,7 +64,7 @@ class Queue{
 
                     $this->mark_error($task['id'],$task['interface'],$result['msg']['data']);  
             
-                    echo date('H:i:s')." - Sms ID = {$task['id']} não enviado. \n";
+                    echo date('H:i:s')." - Sms ID = {$task['id']} não enviado. Error:: ".$result['msg']['data']."\n";
                 }
             }
             sleep($this->smsTime);
@@ -88,7 +88,7 @@ class Queue{
     }
 
     private function mark_complete($task_id,$dongle){
-        $msg = Mensagem::find($task_id);
+        $msg = MensagemCampanha::find($task_id);
         $msg->enviada_em = date('y-m-d H:i:s');
         $msg->interface= $dongle;
         $msg->queue_status = 'ENVIADA';
@@ -97,12 +97,12 @@ class Queue{
     
     private function mark_error($task_id,$inteface,$queue_error){
 
-        $msg = Mensagem::find($task_id);
+        $msg = MensagemCampanha::find($task_id);
         $msg->enviada_em = date('y-m-d H:i:s');
-        $msg->queue_status = 'ERRO';
         $msg->queue_error = $queue_error;
         $msg->interface = $inteface;
         $msg->save();
+
     }
 
 
