@@ -37,13 +37,13 @@ class CampanhaController
     public function novo(Request $request, Response $response, $args)
     {   
 
-       // $dongleCommand = new DongleCommand();
+        $dongleCommand = new DongleCommand();
 
-        $channels = [['ID'=>'dongle1'],['ID'=>'dongle2']];
+        $channels = [];
 
         try{
             // busca lista de devices
-            //$channels = $dongleCommand->getListChannel('',true);      
+            $channels = $dongleCommand->getListChannel('',true);      
         }catch(\Exception $ex){
             $this->app->flash->addMessage('error', $ex->getMessage());
         }
