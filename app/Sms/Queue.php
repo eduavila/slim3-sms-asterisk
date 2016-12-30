@@ -1,6 +1,7 @@
 <?php 
 namespace App\Sms;
 use App\Models\Mensagem;
+use App\Models\MensagemCampanha;
 use App\Sms\DongleCommand;
 use Monolog\Logger;
 
@@ -106,7 +107,7 @@ class Queue{
 
 
     private function get_tasks(){
-
+        
         $sms = MensagemCampanha::where('tipo_envio','CAMPANHA')
                         ->where('queue_status','PROCESSANDO')
                         ->orderBy('id','asc')
