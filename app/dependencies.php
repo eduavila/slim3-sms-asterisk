@@ -39,6 +39,7 @@ $container['view'] = function($c){
     
     $env->addGlobal('tot_contatos',Contato::count());
     $env->addGlobal('tot_msg',Mensagem::where('tipo_envio','RAPIDA')->count());
+    $env->addGlobal('tot_msg_recebida',Mensagem::where('tipo_envio','RAPIDA')->where('status','r')->count());
     $env->addGlobal('tot_campanhas',Campanha::count());
 
     $env->addFunction('replace', new Twig_Function_Function('replace'));

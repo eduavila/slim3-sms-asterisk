@@ -10,6 +10,8 @@ $app->post('/mensagens/enviar','App\Controllers\MensagemController:enviarRapido'
 
 $app->get('/mensagens','App\Controllers\MensagemController:index')->setName('mensagens');
 
+$app->get('/mensagens/recebida/total','App\Controllers\MensagemController:getTotMensageRecebida')->setName('totMensagens');
+
 //Busca sms json.
 $app->get('/mensagens/{numero}/json','App\Controllers\MensagemController:buscarMensagens');
 

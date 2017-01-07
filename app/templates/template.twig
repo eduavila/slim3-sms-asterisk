@@ -15,12 +15,14 @@
     <script src="{{ base_url() }}/js/Chart.min.js"></script>
     <script src="{{ base_url() }}/js/admin.js"></script>
     <script src="{{ base_url() }}/js/chat.js"></script>
+    <script src="{{ base_url() }}/js/notification.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
     
     <title>SMS | Mensagens</title>
   </head>
   <body>
+    <input type="hidden" class="msg-recebida" id="msg-recebida" value="{{tot_msg_recebida}}">
 
     <!-- Sidebar menu - responsive only -->
     <div class="ui sidebar inverted vertical menu">
@@ -35,7 +37,7 @@
       </a>
       <a class="{{ path == '/messagens' ? 'active' : '' }} gray item"  href="{{ path_for('mensagens') }}">
         Mensagens
-        <div class="ui label">{{tot_msg}}</div>
+        <div class="ui label msg-tot">{{tot_msg}}</div>
       </a>
       <a class="{{ path == '/contatos/novo' ? 'active' : '' }} item" href="{{ path_for('contatos_novo') }}">
         Novo Contato
@@ -68,7 +70,7 @@
           <a class="{{ path == '/mensagens' ? 'active' : '' }} gray item" href="{{ path_for('mensagens') }}">
             <i class="large Talk Outline icon"></i> 
             Mensagens
-            <div class="ui label">{{tot_msg}}</div>
+            <div class="ui label msg-tot">{{tot_msg}}</div>
           </a>
           <a class="{{ path == '/contatos/novo' ? 'active' : '' }} item" href="{{ path_for('contatos_novo') }}">
               <i class="large Add User icon"></i> 

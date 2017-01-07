@@ -7,7 +7,7 @@
         </h2>
     </div>
     <div class="sixteen wide sales  fluid column">
-         <table id="mensagens" class="ui celled table datatable" cellspacing="0" width="100%">
+         <table id="mensagens" class="ui celled table" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th>Telefone</th>
@@ -23,7 +23,7 @@
                                 {{ msg.numero }}
                             </a>
                         </td>                  
-                        <td></td>
+                        <td>{{msg.nome_contato}}</td>
                         <td>{{msg.data|date("d/m/Y")}} {{msg.hora}}</td>
                     </tr>
                 {% endfor %}

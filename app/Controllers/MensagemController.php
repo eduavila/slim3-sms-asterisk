@@ -23,8 +23,10 @@ class MensagemController
 
     public function index(Request $request, Response $response, $args)
     {   
-        $mensagens = Mensagem::where('tipo_envio','RAPIDA')
-                                ->groupBy('numero')
+        $mensagens = Mensagem::leftJoin('contatos','contatos.numero','=','mensagens.numero')
+                                ->where('tipo_envio','RAPIDA')
+                                ->groupBy('mensagens.numero')
+                                ->select('mensagens.numero','mensagens.data','mensagens.hora','contatos.nome_contato')
                                 ->orderBy('id','desc')->get();
 
         return $this->app->view->render($response, 'mensagens/mensagens.twig',['mensagens'=>$mensagens]);
@@ -141,5 +143,16 @@ class MensagemController
             }
         }
         return  $response->withJson($allPostVars);
+    }
+
+    public function getTotMensageRecebida(Request $request,Response $response)
+    {   
+        $mensagens_recebida = Mensagem::where('tipo_envio','RAPIDA')->where('status','r')->count();
+        $mensagens_enviada = Mensagem::where('tipo_envio','RAPIDA')->where('status','e')->count();
+        $mensagens_tot = Mensagem::where('tipo_envio','RAPIDA')->count();
+
+        return json_encode(['tot'=>$mensagens_tot,
+                    'tot_recebida'=>$mensagens_recebida,
+                    'tot_envida'=> $mensagens_enviada]);
     }
 }

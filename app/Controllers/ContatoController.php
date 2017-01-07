@@ -58,7 +58,7 @@ class ContatoController
         }
         
         $contato->nome_contato  = $data['nome'];
-        $contato->numero        = $data['telefone'];
+        $contato->numero        = $this->limpaNumero($data['telefone']);
         $contato->email         = $data['email'];
         $contato->obs           = $data['obs'];
 
@@ -91,5 +91,10 @@ class ContatoController
         $this->app->flash->addMessage('error', 'This is a message');
 
         return $response->withStatus(200)->withHeader('Location', '/contatos');
+    }
+
+    private function limpaNumero($numero)
+    {
+        return preg_replace("/[^0-9]/", "", $numero);
     }
 }
