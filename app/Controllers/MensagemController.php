@@ -93,7 +93,7 @@ class MensagemController
 
         try{
             // busca lista de devices
-            $channels = $dongleCommand->getListChannel('',true);  
+           $channels = $dongleCommand->getListChannel('',true);  
 
         }catch(\Exception $ex){
             $this->app->flash->addMessage('error', $ex->getMessage());
@@ -107,11 +107,26 @@ class MensagemController
     // Busca messanges retornando um array json.
     public function buscarMensagens(Request $request,Response $response,$args)
     {
+        $allGetVars = $request->getQueryParams();
+
         $numero = $args['numero'];
 
-        $mensagens = Mensagem::where('tipo_envio','RAPIDA')->where('numero','=',$numero)->get();
+        $mensagens = Mensagem::where('tipo_envio','RAPIDA')
+                            ->where('numero','=',$numero);
+        
+        if(isset($allGetVars['ultimamsg']))
+        {
+            $mensagens->where('id','>',$allGetVars['ultimamsg']);
+        }
 
-        return json_encode($mensagens);
+        if(isset($allGetVars['status']))
+        {
+            $mensagens->where('status','=',$allGetVars['status']);
+        }
+
+        $result = $mensagens->get();
+
+        return json_encode($result);
     }
 
     public function enviarMensagem(Request $request, Response $response, $args)
@@ -148,8 +163,8 @@ class MensagemController
     public function getTotMensageRecebida(Request $request,Response $response)
     {   
         $mensagens_recebida = Mensagem::where('tipo_envio','RAPIDA')->where('status','r')->count();
-        $mensagens_enviada = Mensagem::where('tipo_envio','RAPIDA')->where('status','e')->count();
-        $mensagens_tot = Mensagem::where('tipo_envio','RAPIDA')->count();
+        $mensagens_enviada  = Mensagem::where('tipo_envio','RAPIDA')->where('status','e')->count();
+        $mensagens_tot      = Mensagem::where('tipo_envio','RAPIDA')->count();
 
         return json_encode(['tot'=>$mensagens_tot,
                     'tot_recebida'=>$mensagens_recebida,

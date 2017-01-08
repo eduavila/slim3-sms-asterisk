@@ -1,161 +1,186 @@
 $(document)
   .ready(function(){
 
-    Handlebars.registerHelper('if_eq', function(a, b, opts) {
-        if(a == b) // Or === depending on your needs
-            return opts.fn(this);
-        else
-            return opts.inverse(this);
-    });
+        Handlebars.registerHelper('if_eq', function(a, b, opts) {
+            if(a == b) // Or === depending on your needs
+                return opts.fn(this);
+            else
+                return opts.inverse(this);
+        });
 
-    var chat = {
-
-        messageToSend: '',
-
-        messageResponses: [],
-
-        template: " {{#each mensagens}}"+
-                "<li class='content {{#if_eq this.status 'e' }}msg-right{{/if_eq}}'>"+
-                "   <a class='author'>{{this.numero}}</a>"+
-                "  <div class='metadata'> "+
-                "   <span class='date'>{{this.data}} {{this.hora}}</span>"+
-                "     <i class='checkmark icon success'></i>"+
-                "   </div>"+
-                "       <div class='text'>{{this.mensagem}}</div> "+
-                " </li>" + 
-                "{{/each}}",
-
-
-        init: function(){
-            //Carrega componetes
-            this.cacheDOM();
-
-            //Carrega Evetos
-            this.bindEvents();
-
-            // Rendezia msg.
-            this.loadFullMensgens();
-
-        },
-
-        cacheDOM: function() {
+        Handlebars.registerHelper('formatTime', function (date, format) {
+            var mmnt = moment(date);
+            return mmnt.format(format);
+        });
         
-        //Componete Chat
-        this.$chatHistory = $('.msg-historico');
+        var chat = {
 
-        this.$numberTel = $('#numero');
-        //Botao de envio
-        this.$button = $('button');
-        
-        // Area texto
-        this.$textarea = $('#usermsg');
+            messageToSend: '',
 
-        //Selecao do canal
-        this.$select = $('select');
+            messageResponses: [],
 
-        //Loader 
-        this.$loader = $('.loader'); 
+            template: "{{#each mensagens}}"+
+                      " <li id='{{this.id}}' class='content {{#if_eq this.status 'e' }}msg-right{{/if_eq}}'>"+
+                      "   <a class='author'>{{this.numero}}</a>"+
+                      "   <div class='metadata'> "+
+                      "     <span class='date'>"+
+                      "        <span class='interface'>{{this.interface}}</span>"+ 
+                      "         | {{formatTime this.data 'DD-MM-YYYY'}} {{this.hora}} </span>"+
+                      "     <i class='checkmark icon success'></i>"+
+                      "   </div>"+
+                      "   <div class='text'>{{this.mensagem}}</div> "+
+                      " </li>" + 
+                      "{{/each}}",
 
-        // Lista de Historico
-        this.$chatHistoryList = this.$chatHistory.find('ul');
-        },
+            init: function(){
 
-        // Set envento no botoes
-        bindEvents: function(){
-        
-        // Evento de click
-        this.$button.on('click', this.addMessage.bind(this));
+                //Carrega componetes
+                this.cacheDOM();
 
-        // Evento de enter
-        this.$textarea.on('keyup', this.addMessageEnter.bind(this));
+                //Carrega Eventos
+                this.bindEvents();
 
-        },
+                // Renderiza msg.
+                this.loadFullMensgens();
 
-        loadFullMensgens:function(){
-
-            this.scrollToBottom();
-        
-            var template = Handlebars.compile(this.template);
             
-            //Display AJAX loader animation
-        
-            $("#loader").show();
+                this.getNewMessage();
+            
+            },
 
-            $.ajax({
-                url:'/mensagens/'+this.$numberTel.val()+'/json',
-                dataType:'json',
-                success:function(data){
-                    if(data.length > 0){
-                        var context = { mensagens: data};
-                        $('.msg-historico').find('ul').html(template(context));
-                    }
+            cacheDOM: function(){
+            
+                //Componete Chat
+                this.$chatHistory = $('.msg-historico');
                 
-                    $("#loader").hide();
+                //INPUT NUMERO
+                this.$numberTel = $('#numero');
+                
+                //Botao de envio
+                this.$button = $('button');
+            
+                // Area texto
+                this.$textarea = $('#usermsg');
+
+                //Selecao do canal
+                this.$select = $('select');
+
+                //Loader 
+                this.$loader = $('.loader'); 
+                
+                // Lista de Historico
+                this.$chatHistoryList = this.$chatHistory.find('ul');
+            },
+
+                // Set envento no botoes
+            bindEvents: function(){
+            
+                // Evento de click
+                this.$button.on('click', this.addMessage.bind(this));
+
+                // Evento de enter
+                this.$textarea.on('keyup', this.addMessageEnter.bind(this));
+                
+
+                this.$textarea.on('focus',this.focusMessage.bind(this));
+            },
+            focusMessage:function(){
+                console.log("Focus na mensagem.");
+            },
+            loadFullMensgens:function(){
+
+                this.scrollToBottom();
+            
+                var template = Handlebars.compile(this.template);
+            
+                $.ajax({
+                    url:'/mensagens/'+this.$numberTel.val()+'/json',
+                    dataType:'json',
+                    success:function(data){
+
+                        if(data.length > 0){
+                            var context = { mensagens: data};
+
+                            $('.msg-historico').find('ul').html(template(context));
+                        }
+                    }
+                });
+
+                this.scrollToBottom();
+            },
+
+            addMessage:function(){
+
+                this.messageToSend = this.$textarea.val();
+
+                if(this.messageToSend.trim() !== ''){
+
+                    var data = {"numero":this.$numberTel.val(),"interface":this.$select.val(),"mensagem":this.messageToSend};
+
+                    $.ajax({
+                        url:'/mensagens/'+this.$numberTel.val()+'/json',
+                        dataType:'json',
+                        method:'POST',
+                        data:data,
+                        success:function(data){              
+                            $('.msg-historico').find('ul').apppend(template(context));
+                        },error:function(){
+
+                        }
+                    });  
+
+
+                    this.loadFullMensgens();     
                 }
-            });     
-
-            this.scrollToBottom();
-        },
-        addMessage:function(){
-
-        this.messageToSend = this.$textarea.val();
-
-        if(this.messageToSend.trim() !== ''){
-            var data = {"numero":this.$numberTel.val(),"interface":this.$select.val(),"mensagem":this.messageToSend};
-
-            $.ajax({
-                url:'/mensagens/'+this.$numberTel.val()+'/json',
-                dataType:'json',
-                method:'POST',
-                data:data,
-                success:function(data){              
-
+            },
+            
+            addMessageEnter: function(event){
+                // Se for Enter
+                if (event.keyCode === 13) {
+                    this.addMessage();
                 }
-            });    
-            this.loadFullMensgens();     
-        }
-        },
-        
-        addMessageEnter: function(event){
-            // Se for Enter
-            if (event.keyCode === 13) {
-            this.addMessage();
+            },
+
+            // busca por nova mensagens
+            getNewMessage:function(){ 
+                
+
+                setInterval(function(){
+
+                    var template = Handlebars.compile(chat.template);
+                    var $msgHistoricoli = $('.msg-historico').find('ul > li').last();
+                    var ultimaMsg = $msgHistoricoli.attr('id');
+
+                    $.ajax({
+                        url:'/mensagens/'+chat.$numberTel.val()+'/json?status=r&ultimamsg='+ultimaMsg,
+                        dataType:'json',
+                        success:function(data){
+
+                            if(data.length > 0){
+                                var context = { mensagens: data};
+
+                                $('.msg-historico').find('ul').append(template(context));
+
+                                chat.scrollToBottom();
+                            }
+
+                        },
+                        error:function(){
+                            console.log('error msg');
+                        }
+                    });
+
+                },5000);
+            },
+
+            scrollToBottom: function(){
+                this.$chatHistory.animate({ scrollTop: 9999 }, 'slow');
+            },
+
+            setInterfaceDefault:function(){
+                
             }
-        },
+        };
 
-        scrollToBottom: function() {
-        this.$chatHistory.scrollTop(this.$chatHistory.scrollHeight);
-        }
-    
-    };
-  
-    chat.init();
-
-    setInterval(function(){
-        chat.loadFullMensgens();
-    }, 5000);
-
-    // // busca no chat
-    // var searchFilter = {
-
-    //   options: { valueNames: ['name'] },
-    
-    //   init: function() {
-
-    //     var userList = new List('people-list', this.options);
-    //     var noItems = $('<li id="no-items-found">Nenhuma messagen encontrada</li>');
-        
-    //     userList.on('updated', function(list) {
-    //       if (list.matchingItems.length === 0) {
-    //         $(list.list).append(noItems);
-    //       } else {
-    //         noItems.detach();
-    //       }
-    //     });
-
-    //   }
-
-    // };
-    
-    //searchFilter.init();
+        chat.init();
   });

@@ -307,3 +307,7 @@ ul.doughnut-legend {
 .btn-cancelar{
     margin-top: 10px !important;
 }
+
+.new-message{
+  background-color: rgba(173, 227, 190, 0.32);
+}
