@@ -27,7 +27,7 @@
             <div class="two fields">
                 
                 <div class="field">
-                    <select class="ui fluid search dropdown" tabindex="2" name="interface">
+                    <select class="ui fluid search dropdown" tabindex="2" id="sel-interface">
                         {% for channel in channels %}
                             <option value="{{ channel.ID }}">{{ channel.ID }} </option>
                         {% endfor %}        

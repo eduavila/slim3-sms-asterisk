@@ -19,7 +19,7 @@
             <div class="field">
                 <label>Canal</label>
                 <div class="field">
-                    <select class="ui fluid search dropdown" tabindex="2" name="interface" value="interface" required>
+                    <select class="ui fluid search dropdown" tabindex="2" id="interface" value="" required>
                         {% for channel in channels %}
                             <option value="{{ channel.ID }}">{{ channel.ID }} </option>
                         {% endfor %}        

@@ -20,13 +20,20 @@ $(document)
             messageResponses: [],
 
             template: "{{#each mensagens}}"+
-                      " <li id='{{this.id}}' class='content {{#if_eq this.status 'e' }}msg-right{{/if_eq}}'>"+
-                      "   <a class='author'>{{this.numero}}</a>"+
+                      " <li id='{{this.id}}' data-type='{{this.status}}' class='content {{#if_eq this.status 'e' }}msg-right{{/if_eq}}'>"+
+                      "   <a class='author'>"+
+                      "     {{#if_eq this.status 'e'}}"+
+                      "       {{this.interface}}"+
+                      "     {{else}}"+
+                      "        {{this.numero}}"+
+                      "     {{/if_eq}}"+
+                      "   </a>"+
                       "   <div class='metadata'> "+
                       "     <span class='date'>"+
-                      "        <span class='interface'>{{this.interface}}</span>"+ 
-                      "         | {{formatTime this.data 'DD-MM-YYYY'}} {{this.hora}} </span>"+
-                      "     <i class='checkmark icon success'></i>"+
+                      "         {{#if_eq this.status 'r'}}<span class='interface'>{{this.interface}}</span>{{/if_eq}}"+ 
+                      "         {{formatTime this.data 'DD-MM-YYYY'}} {{this.hora}}"+ 
+                      "     </span>"+
+                      "     <i class='checkmark icon {{#if_eq this.status_queue 'ERRO'}} remove {{else}} success {{/if_eq}}'></i>"+
                       "   </div>"+
                       "   <div class='text'>{{this.mensagem}}</div> "+
                       " </li>" + 
@@ -63,7 +70,7 @@ $(document)
                 this.$textarea = $('#usermsg');
 
                 //Selecao do canal
-                this.$select = $('select');
+                this.$select = $('#sel-interface');
 
                 //Loader 
                 this.$loader = $('.loader'); 
@@ -72,7 +79,7 @@ $(document)
                 this.$chatHistoryList = this.$chatHistory.find('ul');
             },
 
-                // Set envento no botoes
+            // Set envento no botoes
             bindEvents: function(){
             
                 // Evento de click
@@ -80,12 +87,7 @@ $(document)
 
                 // Evento de enter
                 this.$textarea.on('keyup', this.addMessageEnter.bind(this));
-                
-
-                this.$textarea.on('focus',this.focusMessage.bind(this));
-            },
-            focusMessage:function(){
-                console.log("Focus na mensagem.");
+            
             },
             loadFullMensgens:function(){
 
@@ -102,6 +104,7 @@ $(document)
                             var context = { mensagens: data};
 
                             $('.msg-historico').find('ul').html(template(context));
+                            chat.setInterfaceDefault();
                         }
                     }
                 });
@@ -124,11 +127,7 @@ $(document)
                         data:data,
                         success:function(data){              
                             $('.msg-historico').find('ul').apppend(template(context));
-                        },error:function(){
-
-                        }
-                    });  
-
+                        },error:function(){}});  
 
                     this.loadFullMensgens();     
                 }
@@ -143,7 +142,6 @@ $(document)
 
             // busca por nova mensagens
             getNewMessage:function(){ 
-                
 
                 setInterval(function(){
 
@@ -162,15 +160,15 @@ $(document)
                                 $('.msg-historico').find('ul').append(template(context));
 
                                 chat.scrollToBottom();
-                            }
-
+                                                    
+                                chat.setInterfaceDefault();
+                            } 
                         },
                         error:function(){
                             console.log('error msg');
                         }
                     });
-
-                },5000);
+                },5000);    
             },
 
             scrollToBottom: function(){
@@ -178,7 +176,17 @@ $(document)
             },
 
             setInterfaceDefault:function(){
-                
+
+                var $msgHistoricoli = $('.msg-historico').find('ul > li[data-type="r"]').last();
+
+                if($msgHistoricoli)
+                {
+                    // busca ultima interface 
+                    var interface  = $msgHistoricoli.find('.interface').html();
+                    console.log(interface);
+
+                    $('#sel-interface').dropdown('set selected', interface);
+                }
             }
         };
 
