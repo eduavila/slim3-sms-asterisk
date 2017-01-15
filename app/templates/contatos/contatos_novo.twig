@@ -5,8 +5,7 @@
     <h2 class="ui header">Contato</h2>
 </div>
 <div class="sixteen wide sales column">
-    {% include 'notificacao.twig' only %}
-    
+    {% include 'outros/notificacao.twig' only %}
     <form class="ui form" id="contato-form" name="contato-form" method="POST" 
             action="{{ path_for('contatos_salvar') }}">
 

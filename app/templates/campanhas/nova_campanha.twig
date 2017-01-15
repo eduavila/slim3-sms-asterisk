@@ -5,8 +5,7 @@
     <h2 class="ui header">Campanha</h2>
 </div>
 <div class="sixteen wide sales column">
-    {% include 'notificacao.twig' only %}
-    
+    {% include 'outros/notificacao.twig' only %}
     <form class="ui form" id="contato-form" name="contato-form" method="POST" enctype="multipart/form-data" action="{{ path_for('campanhas_salvar') }}">
         <input type="hidden" id="id" value="{{contato.id_contato_id}}">
         <div class="two fields">
