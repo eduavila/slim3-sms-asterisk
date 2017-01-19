@@ -92,7 +92,7 @@ class MensagemController
         $channels = [];
 
         try{
-            // busca lista de devices
+           // busca lista de devices
            $channels = $dongleCommand->getListChannel('',true);  
 
         }catch(\Exception $ex){
@@ -101,7 +101,7 @@ class MensagemController
         
         $numero = trim($args['numero']);
 
-        return $this->app->view->render($response,'detalhe_msg.twig',['channels'=> $channels,'numero'=>$numero]);
+        return $this->app->view->render($response,'mensagens/detalhe_mensagem.twig',['channels'=> $channels,'numero'=>$numero]);
     }
 
     // Busca messanges retornando um array json.

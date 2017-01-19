@@ -1,0 +1,44 @@
+{% extends "template.twig" %}
+
+{% block body %}
+
+    <div class="ui secondary pointing fluid menu">
+        <h2 class="ui header">
+            Mensagens
+        </h2>
+    </div>
+
+    <div class="sixteen wide sales column pagechat">
+        
+        <div class="ui comments msg-historico" id="chatBox">
+
+            <input type="hidden" id="numero" value="{{numero}}">
+
+            <div class="ui active centered inline loader" id="loader"></div>
+            
+            <div class="inner">
+                <ul class="comment"></ul>
+            </div>
+        </div>
+        <form class="ui form">
+            <div class="field">
+                <textarea rows="2" id="usermsg" tabindex="1" minlength="2" maxlength="180"></textarea>
+            </div>
+            <div class="two fields">
+                
+                <div class="field">
+                    <select class="ui fluid search dropdown" tabindex="2" id="sel-interface">
+                        {% for channel in channels %}
+                            <option value="{{ channel.ID }}">{{ channel.ID }} </option>
+                        {% endfor %}        
+                    </select>
+                </div>
+                <div class="field">
+                    <button class="ui button" tabindex="3" type="button" id="submitmsg" value="Submit">Enviar</button> 
+                </div> 
+            </div>
+        </form>
+        <div class="cf"></div>
+    </div>
+{% endblock %}
+
