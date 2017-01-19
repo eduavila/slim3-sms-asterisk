@@ -62,7 +62,7 @@ class MensagemController
         $mensagem->data       = date("y-m-d");
         $mensagem->hora       = date("H:i:s");
         $mensagem->interface  = $data['interface']; 
-        $mensagem->numero     = $this->limpaNumero($data['telefone']);
+        $mensagem->numero     = $this->limpaNumero('0'.$data['telefone']);
         $mensagem->mensagem   = base64_encode($data['mensagem']);
         $mensagem->tipo_envio = 'RAPIDA';
 
