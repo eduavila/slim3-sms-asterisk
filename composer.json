@@ -1,14 +1,13 @@
 {
-    "name": "akrabat/slim3-skeleton",
-    "description": "Simple Slim Framework 3 skeleton with Twig & Monolog.",
+    "name": "eduavila/slim3-sms-asterisk",
+    "description": "Slim project send sms asterisk.",
     "license": "BSD-3-Clause",
     "type": "project",
-    "keywords": ["slim-framework", "skeleton"],
+    "keywords": ["slim-framework", "sms","asterisk"],
     "authors": [
         {
-            "name": "Rob Allen",
-            "email": "rob@akrabat.com",
-            "homepage": "http://akrabat.com"
+            "name": "Eduardo Avila Malheiros",
+            "email": "edu.avila2@gmail.com"
         }
     ],
     "autoload": {
